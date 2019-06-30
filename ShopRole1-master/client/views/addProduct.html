@@ -1,0 +1,121 @@
+<!-- <h1 class="leftTopic">Add Product</h1> -->
+  <div  ng-controller="fileupload-controller">
+    <!-- {{recoverProducts}}
+    {{addedProducts}} -->
+  <form  name="form"   class="uploadPrForm">
+    <div   class="button selectBtn" ngf-select ng-model="file" name="file" ngf-pattern="'*'" 
+      ngf-accept="'.xlsx,.xls'" ngf-max-size="20MB" ngf-min-height="100"
+      ngf-resize="{width: 100, height: 100}">Upload Excel File</div>
+      <!-- <div class="button selectBtn" ngf-select ng-model="file" name="file" ngf-pattern="'*'" ng-if=""
+      ngf-accept="'.xlsx,.xls'" ngf-max-size="20MB" ngf-min-height="100"
+      ngf-resize="{width: 100, height: 100}">Upload Excel File</div> -->
+      <!-- <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
+  <h3 id="status"></h3> -->
+      <!-- <img ng-show="Form.file.$valid" ngf-thumbnail="file" class="thumb"> <div ng-show="Form.file.$valid" ngf-thumbnail="file" class="thumb"></div> -->
+      <button ng-click="file = null" class="submitRemove" ng-show="file">Remove <i class="fa fa-trash-alt"></i></button>
+      <br>
+    <button type="submit" class="submitExcel" ng-click="submit()">Upload <i class="far fa-file-excel"></i></button>
+    <!-- {{filename}}{{progress}} -->
+    <div>
+        <button class="sortBtn" ng-click="sortBy('productPrice')">Price <i class="fas fa-sort"></i></button>
+        <span class="sortorder" ng-show="propertyName === 'productPrice'" ></span>
+        <button class="sortBtn" ng-click="sortBy('productDiscount')">Discount <i class="fas fa-sort"></i></button>
+        <span class="sortorder" ng-show="propertyName === 'productDiscount'" ></span>
+        <button class="sortBtn" ng-click="sortBy('inStock')">In Stock <i class="fas fa-sort"></i> </button>
+        <span class="sortorder" ng-show="propertyName === 'inStock'" ></span>
+        <button class="sortBtn" ng-click="sortBy('category')">Category <i class="fas fa-sort"></i></button>
+        <span class="sortorder" ng-show="propertyName === 'category'" ></span>
+    </div>
+  </form>
+ 
+  <div class="container">
+      <input class="form-control" type="text" ng-model="search" placeholder="Type to Search">
+    <table>
+      <thead>
+          <th>Category</th>
+        <th>Product </th>
+        <th>Brand </th>
+        <th>Price</th>
+        <th>Discount (in %)</th>
+        <th>In Stock </th>
+        <th>Image </th>
+        <th>Options</th>
+      </thead>
+      <tbody>
+       
+          <tr dir-paginate="x in addedProducts |itemsPerPage:10|filter:search|orderBy:propertyName:reverse">
+              <!-- <a ng-href="#/product/{{x._id}}"> -->
+              <td class="coloumn_1" >{{x.category|uppercase}}</td>
+              <!-- <td class="coloumn_1">{{x._id}}</td> -->
+                                        
+              <td class="coloumn_1">{{x.productName}}</td>
+                <td class="coloumn_1">{{x.productBrand}}</td>
+                  <td class="coloumn_1">{{x.productPrice|currency :"&#8377;"}}</td>
+                  <td class="coloumn_1">{{x.productDiscount}}</td>
+                  <td class="coloumn_1">{{x.inStock}}</td>
+                  <!-- <img src="{{x.prodImgUrl}}" alt="img">  -->
+                  <!-- <td ><img src="{{x.prodImgUrl}}" alt="logo"></td> -->
+                  <td class="coloumn_1 uploaded" ng-show="!{{x.isDefaultImg}}" >
+                    <div class="rowImg"><img src="{{x.prodImgUrl}}"  style="width: 100px;
+                      height: 100px;" alt="logo"></div>
+                    
+                    Uploaded <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    <form  name="imageForm">
+                      <div ng-change="submitImage(imageFile,x._id)" class="button btn selectImage" ngf-select ng-model="imageFile" name="file" ngf-pattern="'image/*'"
+                        ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                        ngf-resize="{width: 600, height: 600}" title='Upload Image'><i class="fas fa-image"></i></div>
+                        <!-- <img ng-show="imageForm.imageFile.$valid" ngf-thumbnail="imageFile"  style="width: 100px;
+                        height: 100px;"class="thumb">
+                        <div ng-show="imageForm.imageFile.$valid" ngf-thumbnail="imageFile" style="width: 100px;
+                        height: 100px;" class="thumb"></div><br> -->
+                      
+                    </form></td> 
+
+            
+                  <td class="coloumn_1 notUploaded" ng-show={{x.isDefaultImg}}><div class="rowImg"> <img   style="width: 100px;
+                    height: 100px;" src="{{x.prodImgUrl}}" alt="logo"></div>Not Uploaded <i class="fa fa-times-circle"></i> 
+                   
+                    <form  name="imageForm">
+                      <div ng-change="submitImage(imageFile,x._id)" class="button btn selectImage" ngf-select ng-model="imageFile" name="file" ngf-pattern="'image/*'"
+                        ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                        ngf-resize="{width: 600, height: 600}" title='Upload Image'><i class="fas fa-image"></i></div>
+                        <!-- <img ng-show="imageForm.imageFile.$valid" ngf-thumbnail="imageFile" class="thumb">
+                        <div ng-show="imageForm.imageFile.$valid" ngf-thumbnail="imageFile" class="thumb"></div><br> -->
+                      
+                    </form></td> 
+
+                    
+
+
+
+
+
+
+
+                    
+                    <!-- <div class="button selectBtn" ngf-select ng-model="file" name="file"   ngf-pattern="'image/*'"
+                    ngf-accept="'image/*'"
+       ngf-max-size="20MB" ngf-min-height="100"
+      ngf-resize="{width: 100, height: 100}">
+      Upload Image</div> -->
+       
+    
+      <!-- <button type="submit"   ng-click="submitImage()">Submit</button>   
+      <br>-->    
+                  <!-- <td class="coloumn_1" ng-show=!{{x.isDefaultImg}} class="uploaded">Uploaded  </td>
+                  <td> -->
+                    <td>
+                      <button class="updateBtn" ng-click="clickToOpen(x)">Update <i class="fas fa-edit"></i></button>
+                    <button class="deleteBtn"  ng-click=" removeProduct(x)">Delete <i class="fa fa-trash-alt"></i></button>
+                  </td>
+              
+
+
+  </tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <dir-pagination-controls></dir-pagination-controls>
+    </div>
+  </div>
+</div>

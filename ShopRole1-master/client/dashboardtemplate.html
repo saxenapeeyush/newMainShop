@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Hello, world!</title>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <link rel="stylesheet" href="./bower_components/ng-dialog/css/ngDialog.min.css">
+ <link rel="stylesheet" href="./bower_components/ng-dialog/css/ngDialog-theme-default.min.css">
+
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <link href="./css/dashboard/material-dashboard.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/dashboard/tablemain.css">
+  <link rel="stylesheet" href="./css/dashboard/tableutil.css">
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="./bower_components/ng-dialog/js/ngDialog.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+  <script src="../dirPagination.js"></script>
+  <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+  <script src="https://kit.fontawesome.com/b06605e970.js"></script>
+  <style>
+      .rowImg {
+        margin:12px 0px;
+      }
+   
+      .enabled {
+        color:green;
+        font-weight:bold;
+        letter-spacing: 0.5px;
+      }
+      .disabled {
+        color:red;
+        font-weight:bold;
+        letter-spacing: 0.5px;
+      }
+      .rightLists li a{
+      display:inline-block !important;
+      margin:10px 15px !important;
+      font-size:12.5px !important;
+      font-weight:bold !important;
+    }
+    .rightLists li {
+      list-style: none !important;
+    }
+    .selectBtn {
+      cursor:pointer;
+      border:1px solid white;
+      color:whitesmoke;
+      font-size:12.5px !important;
+      border-radius:1px;
+      display:inline-block;
+      padding:5px 20px;
+      margin:10px 10px;
+      letter-spacing: 0.5px;
+      /* font-weight: bold */
+      background-color:#9c27b0;
+    }
+    .uploadPrForm {
+      display: flex;
+    }
+    .submitExcel {
+      cursor:pointer;
+      font-size:12.5px;
+      font-weight:500;
+      /* border:1px solid #00c437; */
+      color:white;
+      border-radius:1px;
+      display:inline-block;
+      padding:5px 10px;
+      margin:10px 10px;
+      letter-spacing: 0.5px;
+      /* font-weight: bold */
+      /* background-color:#00c437; */
+      transition-duration: 0.5s;
+      background-color:#9c27b0;
+    }
+    .submitExcel:hover {
+      background-color:#00c437;
+    }
+    .submitRemove {
+      cursor:pointer;
+      /* border:1px solid #fc3955; */
+      color:white;
+      border-radius:1px;
+      display:inline-block;
+      padding:5px 15px;
+      font-size:12.5px;
+      margin:10px 10px;
+      letter-spacing: 0.5px;
+      /* font-weight: bold */
+      /* background-color:#fc3955; */
+      transition-duration: 0.5s;
+      background-color:#9c27b0;
+    }
+    .submitRemove:hover {
+      background-color:#fc3955;
+    }
+    .selectImage{
+      cursor:pointer;
+      border:1px solid white;
+      color:whitesmoke;
+      border-radius:1px;
+      display:inline-block;
+      padding:5px 20px;
+      margin:10px 20px;
+      letter-spacing: 0.5px;
+      /* font-weight: bold */
+      background-color:#9c27b0;
+    }
+    .submitImage {
+      cursor:pointer;
+      /* border:1px solid #00c437; */
+      color:white;
+      border-radius:1px;
+      display:inline-block;
+      padding:5px 10px;
+      margin:10px 20px;
+      letter-spacing: 0.5px;
+      /* background-color:#00c437; */
+      background-color:#9c27b0;
+    }
+    .deleteBtn {
+      cursor:pointer;
+      /* border:1px solid #fc3955; */
+      color:white;
+      border-radius:1px;
+      display:inline-block;
+      padding:5px 10px;
+      /* margin:10px 20px; */
+      margin-left:8px;
+      letter-spacing: 0.5px;
+      /* background-color:#fc3955; */
+      transition-duration: 0.5s;
+      background-color:#9c27b0;
+    }
+    .deleteBtn:hover {
+      background-color:#fc3955;
+    }
+    .ng-binding {
+      margin:10px 20px;
+    }
+    .pagination {
+      margin:10px 40px;
+    }
+    .updateBtn {
+      cursor:pointer;
+      /* border:1px solid #49b9ff; */
+      color:white;
+      border-radius:1px;
+      display:inline-block;
+      padding:5px 10px;
+      /* margin:10px 20px; */
+      letter-spacing: 0.5px;
+      /* background-color:#49b9ff; */
+      background-color:#9c27b0;
+      transition-duration: 0.5s;
+    }
+    .updateBtn:hover {
+      background-color:#49b9ff;
+  
+    }
+    .sortBtn {
+      cursor:pointer;
+      /* border:1px solid #49b9ff; */
+      color:white;
+      border-radius:1px;
+      display:inline-block;
+      font-size:12.5px;
+      padding:5px 10px;
+      margin:10px 10px;
+      letter-spacing: 0.5px;
+      /* background-color:#49b9ff; */
+      background-color:#9c27b0;
+      transition-duration: 0.5s;
+    }
+    .notUploaded {
+      color:#fc3955 !important;
+      /* font-weight: bold; */
+    }
+    .uploaded {
+      color:#00c437 !important;
+      /* font-weight: bold; */
+    }
+    </style>
+    
+    <script src="./dashboardapp.js"></script>
+    <script src="./utils/dashboard/config.js"></script>
+    <script src="./routing/dashboard/dashboardrouting.js"> </script>
+    <!-- <script src="./utils/authinterceptor.js"></script> -->
+   
+    
+
+
+    
+  
+    <script src="./factory/dashboard/dashboard-factory.js"></script>
+    <script src="./factory/dashboard/addrole-factory.js"> </script>
+    <script src="./factory/dashboard/fileupload-factory.js"></script>
+    <script src="factory/dashboard/popup-factory.js"></script>
+    <script src="factory/dashboard/recoverProduct-factory.js"></script>
+    <script src="factory/dashboard/dealoftheday-factory.js"></script>
+    <script src="factory/dashboard/deal-factory.js"></script>
+    <script src="factory/dashboard/updatedeal-factory.js"></script>
+
+    
+    <script src="./controllers/dashboard/dashboard-controller.js"></script>
+    <script src="./controllers/dashboard/addRole-controller.js"></script>
+  <script src="./controllers//dashboard/fileupload-controller.js"></script>
+  <script src="./controllers/dashboard/recoverProduct-controller.js"></script>
+  <script src="./controllers/dashboard/singleadminproduct-controller.js"></script>
+  <script src="./controllers//dashboard/popup-controller.js"></script>
+  <script src="./controllers/dashboard/fileupload-controller.js"> </script>
+  <script src="./controllers/dashboard/dealoftheday-controller.js"></script>
+  <script src="./controllers/dashboard/deal-controller.js"></script>
+  <!-- <script src="./controllers/dashboard/deal-controller.js"></script> -->
+  <script src="controllers/dashboard/updatedeal-controller.js"></script>
+  <script src="./controllers/dashboard/adddealcontroller.js"></script>
+ 
+   
+
+</head>
+
+<body ng-app="dashboardapp" ng-controller="dashboard-controller">
+    <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white">
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item active  ">
+            <a class="nav-link" href="#0">
+              <i class="material-icons">dashboard</i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+        </ul>
+        <ul class="rightLists">
+
+<li ng-repeat="right in adminRights">
+  <a ng-href={{right.rightUri}}><i class="fa fa-arrow-right" aria-hidden="true"></i> {{right.rightName}}</a>
+</li>      
+  </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="#pablo">Dashboard</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#pablo">
+                  <i class="material-icons">notifications</i> Notifications
+                </a>
+              </li>
+           
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
+      <div class="content">
+        <div class="container-fluid">
+          <ng-view></ng-view>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<h1>Hello I am dashboard</h1>
+<%=data%>
+<% var user=data%>
+
+
+<% { %>
+
+
+
+    let user=<%- JSON.stringify(user) %>
+    localStorage.setItem("info",JSON.stringify({'user':user}));
+    
+
+<% }  %>
+ 
+
+ 
+<%  { %>
+  
+    <% var user = data %>
+  
+    
+    <script>
+      let user = <%- JSON.stringify(user) %>;
+      localStorage.setItem('info', JSON.stringify({'user': user}));
+      sessionStorage.setItem('info', {'user': user});
+      setTimeout("window.location.assign('https://stackoverflow.com/questions/44564795/how-to-keep-localstorage-values-after-refresh');", 5000);
+      if(!localStorage.getItem('info')){
+    $window.localStorage.setItem('info', JSON.stringify({'user': user}));
+}
+   
+      localStorage.setItem('data', JSON.stringify({'user': user}));
+     
+    //   function Redirect() {
+    //            window.location = "http://127.0.0.1:5501/ShopRole1-master/client/customerindex.html";
+    //         }            
+    //         document.write("You will be redirected to main page in 10 sec.");
+    //         setTimeout('Redirect()', 10000);
+    </script>
+  <% } %>

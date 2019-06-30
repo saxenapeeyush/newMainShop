@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V3</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<script src="bower_components/angular/angular.min.js"></script>
+	<script src="app.js"></script>
+	<script src="./utils/admin/config.js"></script>
+	<script src="factory/admin/admin-factory.js"></script>
+    <script src="controllers/main-controller.js"></script>
+    <script src="controllers/admin/admin-controller.js"></script>
+</head>
+<body ng-app="myapp" ng-controller="admin-controller">
+
+	<div ng-if="!isFirstTime">
+			<form  novalidate name="AdminForm">
+			
+				<div class="limiter">
+			<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+				<div class="wrap-login100">
+					<form class="login100-form validate-form">
+						<span class="login100-form-logo">
+							<i class="zmdi zmdi-landscape"></i>
+						</span>
+	
+						<span class="login100-form-title p-b-34 p-t-27">
+							Log in
+						</span>
+	
+						<div class="wrap-input100 validate-input" data-validate = "Enter username">
+							<input class="input100" ng-required="true"  autocomplete="off" type="text" ng-model="admin.adminName" name="adminName" placeholder="Username">
+							<span class="focus-input100" data-placeholder="&#xf207;"></span>
+						</div>
+						<div class="valmessage"  ng-show="AdminForm.adminName.$touched  && AdminForm.adminName.$error.required">Username can't be empty. </div>
+	
+						<div class="wrap-input100 validate-input" data-validate="Enter password">
+							<input class="input100" ng-required="true" type="{{inputType}}"  ng-model="admin.adminPassword" name="adminPassword" placeholder="Password">
+							<span class="focus-input100" data-placeholder="&#xf191;"></span>
+						</div>
+						<div    class="valmessage" ng-show="AdminForm.adminPassword.$touched &&AdminForm.adminPassword.$error.required">Password can't be empty. </div>
+						<div class="contact100-form-checkbox">
+								<input class="input-checkbox100" ng-model="passwordCheckbox" ng-click="showHidePassword()" id="ckb1" type="checkbox" name="remember-me">
+								<label class="label-checkbox100" for="ckb1">
+									Show Password
+								</label>
+							</div>
+								<span class="login100-form-title p-b-34 p-t-27 successmessage">
+									{{data.data.message}}
+									</span>
+						<div class="container-login100-form-btn">
+							<button ng-click="adminFirstLogin()" class="login100-form-btn" ng-disabled="AdminForm.$invalid || AdminForm.$pending  ">
+								Login
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div></form></div>
+		<div ng-if="isFirstTime">
+				<form  novalidate name="changePassForm">
+				<div class="limiter">
+						<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+							<div class="wrap-login100">
+								<form class="login100-form validate-form">
+									<span class="login100-form-logo">
+										<i class="zmdi zmdi-landscape"></i>
+									</span>
+				
+									<span class="login100-form-title p-b-34 p-t-27">
+									Change Password
+									</span>
+									
+									
+				
+									<div class="wrap-input100 validate-input" data-validate = "Enter New Password">
+										<input class="input100" type="{{inputType}}" ng-model="changePass.newPass" ng-required="true" ng-minlength="5" ng-maxlength="10" name="newPass" placeholder="Enter New Password">
+										<span class="focus-input100" data-placeholder="&#xf191;"></span>
+										
+									</div>
+									<div class="valmessage" ng-show="changePassForm.newPass.$touched  && changePassForm.newPass.$error['required']">Password required.</div>
+									<div class="valmessage" ng-show="changePassForm.newPass.$error.minlength">Password must be of atleast 5 characters.</div>
+									<div class="valmessage"  ng-show="changePassForm.newPass.$error.maxlength">Password can't be more then 10 characters. </div>
+									
+				
+									<div class="wrap-input100 validate-input" data-validate="Enter password">
+										<input class="input100" type="{{inputType}}"  ng-model="changePass.confirmPass"  ng-required="true"  name="confirmPass" placeholder=" Confirm Password">
+										<span class="focus-input100" data-placeholder="&#xf191;"></span>
+									</div>
+									<div  class="valmessage" ng-show="changePassForm.confirmPass.$touched  && changePassForm.confirmPass.$error['required']">Password required.</div>
+				
+									<div class="container-login100-form-btn">
+										<button ng-click="adminChangePassword()" class="login100-form-btn"  ng-disabled="changePassForm.$invalid">
+											Change  Password
+										</button>
+									</div>
+									<div >
+										
+										<span class="login100-form-title p-b-34 p-t-27 successmessage">
+											{{data.data.message}}
+											</span>
+									</div>
+				
+						
+								</form>
+							</div>
+						</div>
+					</div>
+					</form>
+		</div>
+	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+</html>

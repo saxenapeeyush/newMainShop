@@ -1,0 +1,93 @@
+<div ng-controller="customerindividualproduct-controller">
+    <div class="container">
+        <div class="row">
+            <div class="col-7 productImage">
+                  
+                <img  zoom ng-src="{{singleProducts.prodImgUrl}}" alt="Product Image">
+            </div>
+            <div class="col-5">
+                <div class="row">
+                    <div class="col-12">
+                            <h6 class="productBrand">{{singleProducts.productBrand}}
+                                </h6>
+                                <h3 class="productName">{{singleProducts.productName}}</h3>
+                    </div>
+                    <div class="col-12">
+                            <p class="productPrice"> <h3 class="actualprice">{{actualPrice|currency:"&#8377;"}}</h3><del>{{singleProducts.productPrice|currency:"&#8377;"}}</del>
+                                <span class="discountRate">({{singleProducts.productDiscount}}% off)</span></p>
+                            <small>Inclusive of GST</small>
+                    </div>
+                    <div class="col-12 flex">
+                        <div><p class="sizes"><strong>SIZE (IN UK) : <strong>{{shoesize}}</strong></strong></p></div>
+                        <div>
+                            <!-- Button trigger modal -->
+<button type="button" class="sizeChart" data-toggle="modal" data-target="#exampleModal">
+        Size Chart
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Size Chart</h5>
+              <div><img src="../images/ezgif-1-50a7b394db7e.jpg" alt=""></div>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-12">
+                          <div><img class="imagesize" src="https://xrbu86-lh4lsj72oaxn.cloudmaestro.com/pnTTa8y_Q/media/wysiwyg/ReStructuring-images-new/aSize_Chart_1.jpg.pagespeed.ic.VLfUqo9_ma.webp" alt="Size Chart"></div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+                        </div>
+                    </div>
+                    <div class="col-12"> 
+                        
+                        <button ng-model="size"  ng-click="size($event)" value="5" name="size" class="rounded-circle size">5</button>
+                        <button ng-model="size" ng-click="size($event)"   value="6" name="size"  class="rounded-circle size">6</button>
+                        <button ng-model="size" value="7" ng-click="size($event)" class="rounded-circle size">7</button>
+                        <button  ng-model="size" value="8" ng-click="size($event)" class="rounded-circle size">8</button>
+                        <button  ng-model="size" value="9" ng-click="size($event)" class="rounded-circle size">9</button>
+                        <button ng-model="size"  value="10" ng-click="size($event)" class="rounded-circle size">10</button>
+                    </div>
+                    <div class="col-12">
+
+                        <span><strong>QUANTITY</strong></span>
+                        <span ng-click="decreaseQuantity()"><i class="fas fa-minus plusMinus"></i></span>
+                        <span><strong>{{quantity}}</strong></span>
+                        <span ng-click="increaseQuantity()"><i class="fas fa-plus plusMinus"></i></span>
+                    </div>
+                    <div class="col-12">
+
+                        <!-- <input type="text" ng-model="quantity" placeholder="enter quantity"> -->
+                        <button class="addToCart"  ng-if="!isLoggedIn" ng-click="AddToLocalCart(actualPrice)"><i class="fas fa-cart-arrow-down cart-item"></i> ADD TO LOCAL CART</button>
+                        <button class="addToCart" ng-if="isLoggedIn" ng-click="AddToDBCart(actualPrice)"><i class="fas fa-cart-arrow-down cart-item"></i> ADD TO  DB CART</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <button  class="prodDetails">PRODUCT DETAILS</button>
+                <h5>DETAILS</h5>
+                <p>{{singleProducts.productDesc}}</p>
+                <small><strong>Manufacture Addr</strong></small>
+                <p>THEIN LOC SHOES CORPORATION , 108 NGUYEN ANH THU STREET HIEP THANH WARD , DISTRICT 12, HO CHI MINH</p>
+                <small><strong>Country of Origin</strong></small>
+                <p>Vietnam</p>
+            </div>
+        </div>
+    </div>
+
+</div>

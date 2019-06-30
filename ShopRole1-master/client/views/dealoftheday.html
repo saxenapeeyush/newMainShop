@@ -1,0 +1,50 @@
+
+<div ng-controller="dealoftheday-controller">
+       <button class="btn btn-success" ng-click="addDeal()">Add DEAL OF THE DAY</button>
+    
+       
+<!-- {{allDeals}} -->
+
+<button class="sortBtn" ng-click="sortBy('priority')">SORT BY PRIORITY <i class="fas fa-sort"></i></button>
+<span class="sortorder" ng-show="propertyName === 'priority'" ></span>
+ <div class="container">
+        <!-- <input class="form-control" type="text" ng-model="search" placeholder="Type to Search"> -->
+      <table>
+        <thead>
+            <th>PRIORITY</th>
+          <th>IMAGE </th>
+          <!-- <th>EXPIRES IN </th>
+          <th>EXPIRED </th> -->
+
+         
+          <th>Options</th>
+        </thead>
+        <tbody>
+         
+            <tr ng-show="!{{x.isDealDeleted}}" dir-paginate="x in allDeals |itemsPerPage:10|orderBy:propertyName:reverse">
+                <!-- <a ng-href="#/product/{{x._id}}"> -->
+                <td ng-show="!{{x.isDealDeleted}}" class="coloumn_1" ><b>{{x.priority}}</b></td>
+                <!-- <td class="coloumn_1">{{x._id}}</td> -->
+                                          
+                <td ng-show="!{{x.isDealDeleted}}" class="coloumn_1"><img style="height:150px;width:400px;" src="{{x.imageUrl}}" alt="dealImage"></td>
+                  <!-- <td class="coloumn_1">{{x.expiryDate}}</td> -->
+                <!-- <td>{{x.expired}}</td> -->
+                  <!-- <td><p ng-show="!{{x.expired}}">NO</p><p ng-show="{{x.expired}}">YES</p></td>-->
+                  
+                
+                      <td ng-show="!{{x.isDealDeleted}}"> 
+                        <button class="updateBtn" ng-click="clickToUpdate(x)">Update <i class="fas fa-edit"></i></button>
+                      <button class="deleteBtn"  ng-click=" removeDeal(x)">Delete <i class="fa fa-trash-alt"></i></button>
+                    </td>
+                
+  
+  
+    </tr>
+        </tbody>
+      </table>
+      <div class="pagination">
+        <dir-pagination-controls></dir-pagination-controls>
+      </div>
+    </div>
+</div>
+    

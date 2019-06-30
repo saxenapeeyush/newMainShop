@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Magnifier.js-master/magnifier.css">
+   
+    <!-- <script src="https://kit.fontawesome.com/e5c02bf7e0.js"></script> -->
+    <script src="https://kit.fontawesome.com/b06605e970.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        a{
+            text-decoration: none;
+            color:none;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        .card {
+            margin:20px 0px;
+        }
+        del {
+            color:#8F8B8B;
+        }
+        .discountRate {
+            color:#00c437;
+        }
+        .prodDetails {
+            background-color:transparent;
+            border:none;
+            padding:10px 20px;
+            margin:20px 0px;
+            letter-spacing: 0.5px;
+            box-shadow: 4px 4px 10px black;
+        }
+        .actualprice{
+            color:#FF0000;
+        }
+        .productname{
+            color:black;
+        }
+        .footerTags p {
+            font-size:10.5px;
+            padding:5px 0px;
+        }
+        .footerContainer {
+            /* margin:40px 0px; */
+            padding:40px 0px;
+        }
+        .footerUpperContainer {
+            padding:40px 0px;
+        }
+        
+        .footerUpper h5 {
+            font-size:12.5px;
+            /* text-align: center; */
+            color:#9f9f9f;
+        }
+        .contactUsFooter {
+            margin:30px 0px;
+            /* text-align: center; */
+        }
+        .row {
+            margin:0px;
+        }
+        .footerUpper ul {
+            padding:0px ;
+            margin:0px;
+        }
+        .footerUpper ul li {
+            list-style: none;
+            /* text-align: center; */
+            /* color:black; */
+            font-size: 10.5px;
+            padding:5px 0px;
+        }
+        .footerUpper ul li a {
+            color:black;
+            display: inline-block;
+        }
+        .footerUpper ul li a:hover {
+            color:#f30601;
+        }
+        .footerUpper .icon {
+            color:#f30601;
+            display: inline-block;
+            margin-right:5px;
+
+        }
+        .productImage {
+            border:0.5px solid lightgray;
+            transition-duration: 0.5s;
+            margin:53px 0px;
+        }
+        .productImage img {
+            display:inline-block;
+            margin-left:66px;
+            padding-left:50px;
+            width:400px;
+            height:400px;
+        }
+        .productImage:hover {
+            border:0.5px solid #f30601;
+        }
+        .productBrand {
+            margin:20px 0px;
+            margin-top:40px;
+        }
+        .cart-item{
+        font-size:32px;
+        position:relative;
+        color:black;
+    }
+        .addToCart .cart-item {
+            color:white;
+            font-size:20px;
+            margin-right:5px;
+        }
+        .addToCart {
+            padding:15px 30px;
+            font-size:14.5px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            color:#f30601;
+            background-color:#f30601;
+            color:white !important;
+            border:none;
+            margin:30px 0px;
+            transition-duration: 0.5s;
+            transform: scale(1,1);
+        }
+        .addToCart:hover {
+            transform: scale(1.05,1.05);
+        }
+        .size {
+            background-color:transparent;
+            border:1px solid lightgray;
+            transform: scale(1,1);
+            transition-duration: 0.5s;
+            padding:15px 20px;
+            margin:0px 4px;
+        }
+        .cartLength {
+            background-color:#f30601;
+            border-radius:50%;
+            padding:5px 10px ;
+            font-size:13px;
+            color:white;
+            position:absolute;
+            top:13.5px;
+            right:18px;
+        }
+        .size:hover {
+            border: 1px solid #f30601;
+            transform: scale(1.05,1.05);
+        }
+        .sizes{
+            margin:15px 0px;
+
+        }
+        .flex {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .sizeChart {
+            margin:15px 10px;
+            margin-left:25px;
+            background-color:transparent;
+            border:none;
+            color:#0097f5;
+            transition-duration: 0.3s;
+
+        }
+        .sizeChart:hover{
+            color:#f30601;
+
+        }
+        .imagesize{
+            height:100%;
+            width:100%;
+        }
+        .plusMinus{
+            padding:15px 15px;
+            border:1px solid lightgray;
+            border-radius: 50%;
+            margin:20px 5px;
+            transition-duration: 0.2s;
+        }
+        .plusMinus:hover{
+            background-color:#f30601;
+            color:white;
+border:1px solid #f30601;
+
+        }
+        .cartImage img {
+            width:100%;
+            height:100%;
+
+        }
+        .editRemove button {
+            background-color:transparent;
+            font-size:11.5px;
+            padding:5px 15px;
+            /* margin:10px 0px; */
+            border:none;
+            color:#00b3c4;
+        }
+        .cartTopic {
+            border-top:1px solid #e3e4e5;
+            border-bottom:1px solid #e3e4e5;
+            margin-bottom:30px;
+        }
+        .cartItem {
+            border-bottom:1px solid #eaeaea;
+            padding:30px 0px !important;
+            margin:30px 0px !important;
+        }
+        .topicShop {
+            font-size:30px;
+            font-weight: bolder;
+        }
+        .marginTop {
+            margin-top :50px;
+            margin-bottom:15px;
+        }
+        .cartTopic h6 {
+            color:#999;
+            font-size:13.5px;
+            /* margin:30px 0px; */
+            padding:10px 10px;
+            /* text-align: center; */
+        }
+        .cartProductBrand {
+            color:#f30601;
+            font-weight: bold;
+        }
+        .emptyShopping {
+            background-color:#eaeaea;
+            padding:15px 10px;
+        }
+        .emptyShopping button {
+            background-color:transparent;
+            color:black;
+            border:none;
+            margin:0px 30px;
+            font-size:13.5px;
+            letter-spacing: 0.5px;
+        }
+        .emptyShopping button:hover {
+            color:#666666;
+        }
+        .checkOut {
+            padding:10px 30px;
+            font-size:13.5px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            color:#f30601;
+            background-color:#f30601;
+            color:white !important;
+            border:none;
+            transition-duration: 0.5s;
+            transform: scale(1,1);
+        }
+        .checkOut:hover {
+            background-color:black;
+            transform: scale(1.05,1.05);
+        }
+        .customerService {
+            margin-top:50px;
+        }
+        .yourOrder {
+            color:#f30601;
+        }
+        .loginSignUp {
+            text-align: center;
+        }
+        .loginSignUp button {
+            background-color: transparent;
+            border:1px solid lightgray;
+            padding:5px 10px;
+            box-shadow: 4px 4px 4px black;
+            transition-duration: 0.4s;
+            transform: translateX(0px);
+        }
+        .loginSignUp button:hover {
+            transform: translateX(4px);
+        }
+        .loginSignUp button img{
+            width:30px;
+        }
+        .billAmount {
+            text-align: right;
+            font-weight: bold;
+        }
+        .billDetails {
+            text-align: right;
+            margin:40px 0px;
+            font-size:11.5px;
+        }
+        .credit {
+            text-align: left;
+            font-weight: bold;
+        }
+        .grand {
+            color:#f30601;
+            font-size:13.5px;
+            font-weight: bold;
+        }       
+        .mainAmount {
+            color:#f30601;
+            font-size:13.5px;
+        } 
+    </style>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="./bower_components/ng-dialog/js/ngDialog.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <script src="customerapp.js"></script>
+    <script src="./utils/customer/config.js"></script>
+  
+    <script src="./routing/customer/customerrouting.js"></script>
+    <script src="factory/customer/customermain-factory.js"></script>
+    <script src="factory/customer/customerproduct-factory.js"> </script>
+    <script src="factory/customer/customerregisterfactory.js"></script>
+    <script src="factory/customer/customersingleproductfactory.js"></script>
+    <script src="factory/customer/customernavbarfactory.js"></script>
+    <script src="factory/customer/customercart-factory.js"></script>
+    <script src="factory/customer/customerform-factory.js"></script>
+    <script src="controllers/customer/customermain-controller.js"></script>
+    <script src="controllers/customer/navbar-controller.js"> </script>
+    <script src="controllers/customer/customersignin-controller.js"></script>
+    <script src="controllers/customer/customerproduct-controller.js"></script>
+    <script src="controllers/customer/customerindividualproduct-controller.js"></script>
+    <script src="controllers/customer/customercart-controller.js"></script>
+    <script src="controllers/customer/customer-register.js"></script>
+    <script src="controllers/customer/customerform-controller.js"></script>
+   
+    
+    <style>
+   
+
+        </style>
+   
+    
+    <title>Document</title>
+</head>
+<body ng-app="customerapp" ng-controller="customermain-controller">
+        <div ng-include="'./views/customernavbar.html'"></div>
+      
+  
+     
+    <ng-view></ng-view>
+    <div ng-include="'./views/footerupper.html'"></div>
+    <div ng-include="'./views/customerfooter.html'"></div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/jqzoom.js"></script>
+    <script>
+    $("#bzoom").zoom({
+zoom_area_width: 300,
+// MORE OPTIONS HERE
+});
+    </script>
+</body>
+</html>

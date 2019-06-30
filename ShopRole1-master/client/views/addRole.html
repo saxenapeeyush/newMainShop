@@ -1,0 +1,43 @@
+
+<div ng-controller="addRole-controller" >
+        <h1 class="leftTopic"><i class="fa fa-plus-circle" aria-hidden="true">Add Role</i></h1>
+            <div class="limiter">
+                <div class="container-table100">
+                    <div class="wrap-table100">
+                        <div class="table100">
+                            <table ><thead >
+                                    <tr class="table100-head"  >
+                                       
+                                        <th  >Role Name </th>
+                                        <th  > Role Description</th>
+                                        <th  > Status</th>
+                                      
+                                      
+                                       
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr ng-repeat="x in data">
+                                        
+                                            <td class="coloumn_1">{{x.roleName}}</td>
+                                       
+                                            <td class="column_2" ng-if="readmore">{{x.roleDesc | limitTo:20}}<button ng-if="readmore" ng-click="readmore()">Read More</button> </td>
+                                            <td class="column_2" ng-if="!readmore">{{x.roleDesc}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium minus eos tempora doloremque, laudantium eligendi cum voluptas maxime odit nihil nostrum nesciunt voluptatem, recusandae ducimus totam, est in a neque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi aliquam fuga eaque quod delectus unde est deserunt nobis cum, amet voluptatum aperiam temporibus soluta ducimus minus tenetur voluptatibus numquam minima.
+                        
+                                                 <button ng-if="readmore" ng-click="readmore()" class="btn btn-success">Read More</button> </td>
+                                            <td class="column_3" ng-class="({{x.roleStatus}}==Active) ? 'enabled' : 'disabled'">{{x.roleStatus}} <i class="fa fa-check-circle" aria-hidden="true"></i></td>
+                                            
+                                            
+                                            
+                                        </tr>
+                                      
+                                        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+</div>

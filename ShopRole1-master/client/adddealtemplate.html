@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Contact V4</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/dashboard/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/dashboard/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/dashboard/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/dashboard/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/dashboard/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/dashboard/vendor/daterangepicker/daterangepicker.css">
+	<style>
+	.inStockFlex {
+		display:flex;
+		flex-wrap: wrap;
+	}
+	.inStockFlex input {
+		margin:4px 20px; 
+	}
+	.ngdialog.ngdialog-theme-default {
+		padding:0px !important;
+	}
+	.container-contact100 {
+		padding:5px 10px !important;
+	}
+		.rowImg {
+		  margin:12px 0px;
+		}
+	 
+		.enabled {
+		  color:green;
+		  font-weight:bold;
+		  letter-spacing: 0.5px;
+		}
+		.disabled {
+		  color:red;
+		  font-weight:bold;
+		  letter-spacing: 0.5px;
+		}
+		.rightLists li a{
+		display:inline-block !important;
+		margin:10px 15px !important;
+		font-size:12.5px !important;
+		font-weight:bold !important;
+	  }
+	  .rightLists li {
+		list-style: none !important;
+	  }
+	  .selectBtn {
+		cursor:pointer;
+		border:1px solid white;
+		color:whitesmoke;
+		font-size:12.5px !important;
+		border-radius:1px;
+		display:inline-block;
+		padding:5px 20px;
+		margin:10px 10px;
+		letter-spacing: 0.5px;
+		/* font-weight: bold */
+		background-color:#9c27b0;
+	  }
+	  .uploadPrForm {
+		display: flex;
+	  }
+	  .submitExcel {
+		cursor:pointer;
+		font-size:12.5px;
+		font-weight:500;
+		/* border:1px solid #00c437; */
+		color:white;
+		border-radius:1px;
+		display:inline-block;
+		padding:5px 10px;
+		margin:10px 10px;
+		letter-spacing: 0.5px;
+		/* font-weight: bold */
+		/* background-color:#00c437; */
+		transition-duration: 0.5s;
+		background-color:#9c27b0;
+	  }
+	  .submitExcel:hover {
+		background-color:#00c437;
+	  }
+	  .submitRemove {
+		cursor:pointer;
+		/* border:1px solid #fc3955; */
+		color:white;
+		border-radius:1px;
+		display:inline-block;
+		padding:5px 15px;
+		font-size:12.5px;
+		margin:10px 10px;
+		letter-spacing: 0.5px;
+		/* font-weight: bold */
+		/* background-color:#fc3955; */
+		transition-duration: 0.5s;
+		background-color:#9c27b0;
+	  }
+	  .submitRemove:hover {
+		background-color:#fc3955;
+	  }
+	  .selectImage{
+		cursor:pointer;
+		border:1px solid white;
+		color:whitesmoke;
+		border-radius:1px;
+		display:inline-block;
+		padding:5px 20px;
+		margin:10px 20px;
+		letter-spacing: 0.5px;
+		/* font-weight: bold */
+		background-color:#9c27b0;
+	  }
+	  .submitImage {
+		cursor:pointer;
+		/* border:1px solid #00c437; */
+		color:white;
+		border-radius:1px;
+		display:inline-block;
+		padding:5px 10px;
+		margin:10px 20px;
+		letter-spacing: 0.5px;
+		/* background-color:#00c437; */
+		background-color:#9c27b0;
+	  }
+	  .deleteBtn {
+		cursor:pointer;
+		/* border:1px solid #fc3955; */
+		color:white;
+		border-radius:1px;
+		display:inline-block;
+		padding:5px 10px;
+		/* margin:10px 20px; */
+		margin-left:8px;
+		letter-spacing: 0.5px;
+		/* background-color:#fc3955; */
+		transition-duration: 0.5s;
+		background-color:#9c27b0;
+	  }
+	  .deleteBtn:hover {
+		background-color:#fc3955;
+	  }
+	  .ng-binding {
+		margin:10px 20px;
+	  }
+	  .pagination {
+		margin:10px 40px;
+	  }
+	  .updateBtn {
+		cursor:pointer;
+		/* border:1px solid #49b9ff; */
+		color:white;
+		border-radius:1px;
+		display:inline-block;
+		padding:5px 10px;
+		/* margin:10px 20px; */
+		letter-spacing: 0.5px;
+		/* background-color:#49b9ff; */
+		background-color:#9c27b0;
+		transition-duration: 0.5s;
+	  }
+	  .updateBtn:hover {
+		background-color:#49b9ff;
+	
+	  }
+	  .sortBtn {
+		cursor:pointer;
+		/* border:1px solid #49b9ff; */
+		color:white;
+		border-radius:1px;
+		display:inline-block;
+		font-size:12.5px;
+		padding:5px 10px;
+		margin:10px 10px;
+		letter-spacing: 0.5px;
+		/* background-color:#49b9ff; */
+		background-color:#9c27b0;
+		transition-duration: 0.5s;
+	  }
+	  .notUploaded {
+		color:#fc3955 !important;
+		/* font-weight: bold; */
+	  }
+	  .uploaded {
+		color:#00c437 !important;
+		/* font-weight: bold; */
+	  }
+	  </style>
+
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./css/dashboard/util.css">
+	<link rel="stylesheet" type="text/css" href="./css/dashboard/main.css">
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="dashboardapp.js"></script>
+	<!-- <script src="factory/dashboard/popup-factory.js"></script> -->
+	<script src="controllers/dashboard/adddealcontroller.js"></script>
+	<!-- <script src="./controllers/dashboard/deal-controller.js"></script> -->
+	
+
+<!--===============================================================================================-->
+</head>
+<body >
+
+
+	<div class="container-contact100" ng-controller="adddeal-controller">
+		<div class="wrap-contact100">
+                <!-- <form  name="imageForm">
+                        <div ng-change="submitImage(imageFile,x._id)" class="button btn selectImage" ngf-select ng-model="imageFile" name="file" ngf-pattern="'image/*'"
+                          ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                          ngf-resize="{width: 400, height: 400}" title='Upload Image'><i class="fas fa-image"></i></div>
+                         <img ng-show="imageForm.imageFile.$valid" ngf-thumbnail="imageFile"  style="width: 100px;
+                          height: 100px;"class="thumb">
+                          <div ng-show="imageForm.imageFile.$valid" ngf-thumbnail="imageFile" style="width: 100px;
+                          height: 100px;" class="thumb"></div><br>
+                        
+                      </form> -->
+			<!-- <form class="contact100-form validate-form" name="imageForm"> -->
+                    <!-- <div class="wrap-input100 validate-input" >
+                            <span class="label-input100">ADD DEAL IMAGE</span>
+                            <div ng-change="uploadImageCheck()" class="button btn selectImage" ngf-select ng-model="imageFile" name="file" ngf-pattern="'image/*'"
+                    ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
+                    ngf-resize="{width: 100%, height: 100%}" title='Upload Image'><i class="fas fa-image"></i></div> -->
+                    <!-- <span ng-if="uploadDone">Uploaded</span> -->
+                       <!-- <img ng-show="imageForm.imageFile.$valid" ngf-thumbnail="imageFile"  style="width: 100px;
+                          height: 100px;"class="thumb">
+                          <div ng-show="imageForm.imageFile.$valid" ngf-thumbnail="imageFile" style="width: 100%;
+                          height: 100%;" class="thumb"></div> -->
+<!--                             
+                        </div> 
+                    <br> -->
+				<!-- <span class="contact100-form-title">
+					Update Product
+				</span> -->
+                <!-- {{object}} -->
+                
+
+
+				<div class="wrap-input100 validate-input" >
+					<span class="label-input100">PRIORITY</span>
+					<input class="input100" type="text" name="priority" ng-model="priority">
+					<span class="focus-input100"  ></span>
+					<p ng-show="priorityError" style="color:red;"><strong>Priority Already Exists</strong></p>                </div>
+                <!-- <div class="wrap-input100 validate-input" >
+                        <span class="label-input100">Expired?</span>
+                        <input class="input100" type="text" ng-model="expired" name=" expirydateandtime"  >
+                        
+                    
+					</div> -->
+					<div class="wrap-input100 validate-input inStockFlex" >
+							<span class="label-input100">Expired?</span><br>
+							 <!-- <input class="input100" type="text" name="email" value="{{object.inStock}}" > 
+							<span   class="focus-input100"></span>
+							 <input type="radio"  name="inStock" ng-model="inStock" value="Y" ng-checked="isChecked"> YES<br>
+							<input type="radio" name="inStock"  ng-model="inStock" value="N"  ng-checked="!isChecked"> NO<br>  -->
+							<input type="radio" name="expired" ng-model="expired" ng-checked="isChecked"  value="Y" > YES<br>
+							<input type="radio" name="expired"  ng-model="expired"  value="N" ng-checked="!isChecked" > NO<br>
+						
+						</div>
+				
+
+				<!--<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+					<span class="label-input100">DESCRIPTION</span>
+					<input class="input100" type="text"  ng-model="productDesc" name="productDesc"  placeholder="Enter product description.">
+					<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<span class="label-input100">PRICE</span>
+						<input class="input100" type="text" ng-model="productPrice" name="productPrice"  placeholder="Enter the price.">
+						<span class="focus-input100"></span>
+					</div> -->
+					<!-- <div class="wrap-input100 validate-input inStockFlex" data-validate = "Valid email is required: ex@abc.xyz">
+							<span class="label-input100">In STOCK</span><br>
+						 <input class="input100" type="text" name="email" value="{{object.inStock}}" > 
+							<span   class="focus-input100"></span>
+							<input type="radio"  name="inStock" ng-model="inStock" value="Y" ng-checked="isChecked"> YES<br>
+							<input type="radio" name="inStock"  ng-model="inStock" value="N"  ng-checked="!isChecked"> NO<br> 
+							<input type="radio" name="inStock" ng-model="inStock"  value="Y" ng-checked="isChecked"> YES<br>
+							<input type="radio" name="inStock"  ng-model="inStock"  value="N" ng-checked="!isChecked"> NO<br>
+						
+						</div>
+						<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+								<span class="label-input100">CATEGORY</span>
+								<input class="input100" type="text" name="category" ng-model="category"  >
+								<span class="focus-input100"></span>
+								<input type="radio" name="inStock"  value="Y" ng-checked="isChecked"> YES<br>
+								<input type="radio" name="inStock" value="N"  ng-checked="!isChecked"> NO<br> 
+								
+							
+							</div>
+							<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+									<span class="label-input100">PRODUCT DISCOUNT(in %)</span>
+									<input class="input100" type="text" ng-model="productDiscount" name=" productDiscount"  >
+									
+								
+								</div>
+					 -->
+
+				<!-- <div class="wrap-input100 input100-select">
+					<span class="label-input100">Needed Services</span>
+					<div>
+						<select class="selection-2" name="service">
+							<option>Choose Services</option>
+							<option>Online Store</option>
+							<option>eCommerce Bussiness</option>
+							<option>UI/UX Design</option>
+							<option>Online Services</option>
+						</select>
+					</div>
+					<span class="focus-input100"></span>
+				</div> -->
+
+				<!-- <div class="wrap-input100 input100-select">
+					<span class="label-input100">Budget</span>
+					<div>
+						<select class="selection-2" name="budget">
+							<option>Select Budget</option>
+							<option>1500 $</option>
+							<option>2000 $</option>
+							<option>2500 $</option>
+						</select>
+					</div>
+					<span class="focus-input100"></span>
+				</div> -->
+
+				<!-- <div class="wrap-input100 validate-input" data-validate = "Message is required">
+					<span class="label-input100">Message</span>
+					<textarea class="input100" name="message" placeholder="Your message here..."></textarea>
+					<span class="focus-input100"></span>
+				</div> -->
+
+				<div class="container-contact100-form-btn">
+					<div class="wrap-contact100-form-btn">
+						<div class="contact100-form-bgbtn"></div>
+						<button ng-click="DealUpdated()" class="contact100-form-btn">
+							<span>
+								Submit
+								<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+							</span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<!-- <script>
+		  document.getElementById("name").setAttribute('value',"{{object.productBrand}}");
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script> -->
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>
