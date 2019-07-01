@@ -6,8 +6,6 @@ const userModel=require('../../models/users/userModel');
 const cartModel=require('../../models/users/cartModel');
 const config=require('../../utils/config');
 const bcrypt=require('../../utils/bcrypt');
-const userOrderMap=require('../../models/users/userorderMap');
-const OrderModel=require('../../models/users/orderModel');
 const customerOperations =require('../../db/helpers/customer/customerOperations');
 customerRoutes.post('/addOrder',(req,res)=> {
     console.log("Hello I am add order ");
@@ -22,31 +20,10 @@ customerRoutes.post('/addOrder',(req,res)=> {
     let state=req.body.state;
     let zipCode=req.body.zip;
     if(paymentMethod=='COD') {
-    let findUserId=customerOperations.findUserByMail(emailId);
-    findUserId.then((userId)=> {
-        let newUserOrderObject= new userOrderMap(userId);
-        let addUserOrder=customerOrderOperations.addUserOrderMap(newUserOrderObject);
-        addUserOrder.then((userOrder)=>{
-            let findCartId=customerOperations.findUserId(emailId);
-            findCartId.then((cartId)=> {
-                let findWholeCarts=customerOperations.findCartProductsForOrder(cartId);
-                findWholeCarts.then((cartProducts)=> {
-                    let billingAmount=cartProducts.reduce((acc,product)=> {
-                        acc+=parseFloat(product.subTotal);
-                    },acc=0);
-                    // orderStatus will initially be as Placed
-                    let newOrder=new OrderModel(userOrder.orderId,firstName,lastName,emailId,cartProducts,billingAmount,config.orderStatusInitial,paymentMethod,config.paymentStatusForCod,fullAddress,zipCode,country,state);
-                    customerOrderOperations.addNewOrder(newOrder,res);
-                });
-            }).catch(err=> {
-                console.log(err);
-            })
-        }).catch(err=> {
-            console.log(err);
-        })
-    }).catch(err=> {
-        console.log(err);
-    })
+        let userId=await customerOrderOperations.makeOrderAndAdd(emailId,firstName,lastName,paymentMethod,fullAddress,zipCode,country,state);
+        if(userId) {
+            customerOrderOperations.findAllOrdersOfUser(userId,res);
+        }
     }
 });
 customerRoutes.post('/removefromdbcart',(req,res)=>{
@@ -64,8 +41,7 @@ customerRoutes.post('/login',(req,res)=> {
     let sessionProducts=req.body.sessionProducts;
     customerOperations.loginUser(emailId,password,sessionProducts,res);
 })
-customerRoutes.post("/getcustomercart",(req,res)=>{
-    console.log("inside get customer cart ");  
+customerRoutes.post("/getcustomercart",(req,res)=>{ 
     let emailId=req.body.email;
     let findCartId=customerOperations.findUserId(emailId);
     findCartId.then((cartId)=> {

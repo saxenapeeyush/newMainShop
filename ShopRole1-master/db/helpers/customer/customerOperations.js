@@ -18,7 +18,8 @@ const customerOperations = {
             }
         })
     },
-    findUserByMail(emailId) {
+    async findUserByMail(emailId) {
+        console.log("Find User by Mail");
         return new Promise((resolve,reject)=> {
             customerNewSchema.findOne({userEmail:emailId},(err,doc)=> {
                 if(err) {
@@ -30,7 +31,7 @@ const customerOperations = {
             })
            })
     },
-    findUserId(email) {
+    async findUserId(email) {
        return new Promise((resolve,reject)=> {
         customerNewSchema.findOne({userEmail:email},(err,doc)=> {
             if(err) {
@@ -47,7 +48,7 @@ const customerOperations = {
         })
        })
     },
-    findCartProductsForOrder(cartId) {
+    async findCartProductsForOrder(cartId) {
       return new Promise((resolve,reject)=> {
         cartSchema.find({cartId:cartId},"prodImgUrl productId productBrand productName actualPrice quantity shoesize subTotal inStock category productDiscount cartItemId",(err,docs)=> {
             if(err) {
@@ -65,7 +66,6 @@ const customerOperations = {
                 res.status(500).json({status:config.ERROR,message:"Error while sending the cart "});  
             }
             else {
-                console.log(docs);
                 res.status(200).json({status:config.SUCCESS,message:"Successfully Fetched the cart objects ",docs:docs});
             }
         });
