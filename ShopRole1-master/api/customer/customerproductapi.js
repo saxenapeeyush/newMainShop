@@ -20,10 +20,13 @@ customerRoutes.post('/addOrder',(req,res)=> {
     let state=req.body.state;
     let zipCode=req.body.zip;
     if(paymentMethod=='COD') {
-        let userId=await customerOrderOperations.makeOrderAndAdd(emailId,firstName,lastName,paymentMethod,fullAddress,zipCode,country,state);
-        if(userId) {
+        let newPromise=customerOrderOperations.makeOrderAndAdd(emailId,firstName,lastName,paymentMethod,fullAddress,zipCode,country,state);
+        newPromise.then((userId)=> {
+            console.log("user id aa gayi ");
             customerOrderOperations.findAllOrdersOfUser(userId,res);
-        }
+        }).catch(err=> {
+            res.status(500).json({status:config.ERROR,message:"Error While adding the orders ",err:err});
+        })
     }
 });
 customerRoutes.post('/removefromdbcart',(req,res)=>{

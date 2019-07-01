@@ -3,6 +3,7 @@ const orderSchema=require('../../models/customer/orderSchema');
 const customerOperations = require('../../../db/helpers/customer/customerOperations');
 const config=require('../../../utils/config');
 const userOrderMap=require('../../../models/users/userorderMap');
+const cartSchema=require('../../models/customer/cartSchema');
 const OrderModel=require('../../../models/users/orderModel');
 const customerOrderOperations = {
     async addUserOrderMap(userOrderMapObject) {
@@ -43,8 +44,20 @@ const customerOrderOperations = {
             let newOrder=new OrderModel(addUserOrder.orderId,firstName,lastName,emailId,findWholeCarts,billingAmount,config.orderStatusInitial,paymentMethod,config.paymentStatusForCod,fullAddress,zipCode,country,state);
             return newOrder;
     },
+    emptyWholeCart(userId) {
+        let cartId=customerOperations.findCartId(userId);
+        cartId.then((userCartId)=> {
+            cartSchema.deleteMany({cartId:userCartId.cartId},(err)=>{
+                if(err) {
+                    console.log("Error while deleting the objects from carts while adding the orders of the customer ");
+                }
+            })
+        })
+    },
     findOrders(orders,res) {
         let orderIdArray=[];
+        let userId=orders[0].userId;
+        console.log(userId);
         for(let order of orders) {
             orderIdArray.push(order.orderId);
         }
@@ -53,6 +66,7 @@ const customerOrderOperations = {
                 res.status(500).json({status:config.ERROR,message:"Order has not been placed "});
             }
             else{
+                this.emptyWholeCart(userId);
                 res.status(200).json({status:config.SUCCESS,message:"Order has been placed Successfully",allOrders:docs});
             }
         })
