@@ -40,6 +40,7 @@ app.use('/product',require('./api/adminApis/productApi'));
 app.use('/deal',require('./api/adminApis/dealApi'));
 app.use('/customer',require('./api/customer/customerproductapi'));
 app.use('/login',require('./api/customer/customerRoutes'));
+app.use('/deliveryboy',require('./api/deliveryBoy/deliveryBoyApi'));
 
 const authCheck = (req,res,next)=> {
     if(!req.user) {
