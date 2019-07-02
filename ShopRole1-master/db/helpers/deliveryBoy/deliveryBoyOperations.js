@@ -24,9 +24,11 @@ const deliveryBoyOperations =  {
     fetchUnVerified(res){
         deliveryBoySchema.find({verified:false},(err,docs)=> {
             if(err) {
+                console.log("fetch ke andar error");
                 res.status(500).json({status:config.ERROR,message:"Error while fetching the unverified delivery boy data"})
             }
             else{
+                console.log("fetch ke andar no error");
                 res.status(200).json({status:config.SUCCESS,message:"Fetched the unverified data successfully ",docs:docs});
             }
         });

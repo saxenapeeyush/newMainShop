@@ -19,3 +19,8 @@ dashboardapp.constant("UPDATEEXISTINGDEAL_URL","http://localhost:1234/deal/updat
 
 
 dashboardapp.constant("ALLORDERS_URL","http://localhost:1234/allorders");
+dashboardapp.constant("GETVERIFIEDBOYS_URL","http://localhost:1234/deliveryboy/fetchVerified");
+dashboardapp.constant("GETUNVERIFIEDBOYS_URL","http://localhost:1234/deliveryboy/fetchUnVerified");
+dashboardapp.constant("VERIFYDELIVERYBOYS_URL","http://localhost:1234/deliveryboy/verifyDeliveryBoy");
+dashboardapp.constant("UNVERIFYDELIVERYBOYS_URL","http://localhost:1234/deliveryboy/unVerifyDeliveryBoy");
+

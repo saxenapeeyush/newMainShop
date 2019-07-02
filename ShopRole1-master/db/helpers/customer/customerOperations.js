@@ -6,6 +6,7 @@ const customerNewSchema=require('../../models/customer/newCustomerSchema');
 const cartCustomerMapSchema=require('../../models/customer/cartCustomerMapSchema');
 const cartSchema=require('../../models/customer/cartSchema');
 const cartModel=require('../../../models/users/cartModel');
+const mailUser=require('../../../utils/nodemailer/contactusmail');
 const bcrypt=require('../../../utils/bcrypt');
 const customerOperations = {
     removeItemFromCart(cartId,cartItemId,res) {
@@ -229,6 +230,8 @@ console.log("err",err);
                             res.status(500).json({status:config.ERROR,message:"Unable to add the user "});
                         }
                         else{
+                            let userName=newUserObject.userFirstName + ' ' + newUserObject.userLastName;
+                            mailUser(newUserObject.userEmail,newUserObject.userFirstName);
                             // means the user object has been created . Now if the user Object is created then we have to create the cart ID and have the mapping of the cartID .
                            this.cartCustomerMapping(doc.userId,res); 
                         }    

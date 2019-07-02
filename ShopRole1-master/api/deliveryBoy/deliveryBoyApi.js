@@ -24,6 +24,7 @@ deliveryBoyApi.post('/deliveryForm',(req,res)=> {
 });
 deliveryBoyApi.post('/verifyDeliveryBoy',(req,res)=> {
     let deliveryBoyId=req.body.deliveryBoyId;
+    console.log(deliveryBoyId)
     deliveryBoyOperations.verifyDeliveryBoy(deliveryBoyId,res);
 });
 deliveryBoyApi.post('/unVerifyDeliveryBoy',(req,res)=> {
