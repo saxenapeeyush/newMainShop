@@ -16,3 +16,6 @@ dashboardapp.constant("REMOVEPERMANENT_URL","http://localhost:1234/product/perma
 
 
 dashboardapp.constant("UPDATEEXISTINGDEAL_URL","http://localhost:1234/deal/updateDeal");
+
+
+dashboardapp.constant("ALLORDERS_URL","http://localhost:1234/allorders");

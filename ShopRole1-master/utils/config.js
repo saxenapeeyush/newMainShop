@@ -42,6 +42,14 @@ const config = {
             {
                 "rightName":'Deal Of The Day',
                 "rightUri":'/dealoftheday'
+            },
+            {
+                "rightName":'All Orders',
+                "rightUri":'/allorders'
+            },
+            {
+                "rightName":'Delivery Boys',
+                "rightUri":'/deliveryboys'
             }
         ],
         rightStatus:'Active',

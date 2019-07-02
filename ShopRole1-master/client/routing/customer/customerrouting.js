@@ -21,6 +21,11 @@ customerapp.config(function($routeProvider, $locationProvider){
         controller:'customerform-controller'
       
     })
+    .when('/customer/paymentgateways',{
+        templateUrl:'./views/paymentgateways.html',
+        controller:'paymentgateways-controller'
+      
+    })
    
    
     .otherwise({

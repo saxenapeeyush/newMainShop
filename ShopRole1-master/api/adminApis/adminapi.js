@@ -16,6 +16,9 @@ const upload=require("../../utils/multer");
 const ProdImgUpload=require('../../models/admin/products/prodImgUpload');
 const imageUpload=require('../../utils/multernew');
 const tokenMiddleware=require("../../utils/tokenmiddleware");
+adminApi.get('/allorders',(req,res)=> {
+    adminOperations.getAllOrders(res);
+})
 // adminApi.post("https://pincode.p.rapidapi.com/")
 // .header("X-RapidAPI-Host", "pincode.p.rapidapi.com")
 // .header("X-RapidAPI-Key", "f6e1cddbf9msh7175b38cbb11be8p18c41ejsnaad66c617351")
@@ -97,22 +100,7 @@ adminApi.post("/uploadImage",(req,res)=>{
        else{
            console.log("file nahi mili");
                }
-        // try {
-        //     exceltojson({
-        //         input: req.file.path, //the same path where we uploaded our file
-        //         output: null, //since we don't need output.json
-        //     }, function(err,result){
-        //         if(err) {
-        //             return res.json({error_code:1,err_desc:err, data: null});
-        //         } 
-        //         else{
-        //             productOperations.addBulkProducts(result,res);
-        //         }
-        //     });
-        // } catch (e){
-        //     res.json({error_code:1,err_desc:"Corupted excel file"});
-        // }
-    
+       
     })
 })
 adminApi.post("/newupload",(req,res)=>{

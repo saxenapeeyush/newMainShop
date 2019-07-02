@@ -1,4 +1,4 @@
-customerapp.controller("customerform-controller",function($scope,customerformfactory){
+customerapp.controller("customerform-controller",function($location,$window,$rootScope,$scope,customerformfactory){
     $scope.user={};
     console.log("You are inside customerform controller");
     if(localStorage.userEmail){
@@ -13,6 +13,19 @@ customerapp.controller("customerform-controller",function($scope,customerformfac
     $scope.submit=()=>{
         console.log("pressed");
         console.log("$scope.user",$scope.user);
+        $rootScope.userAddressForm=$scope.user;
+        console.log($rootScope.userAddressForm);
+        console.log($scope.user.payment);
+        if($scope.user.payment=="NB"){
+            console.log("you have selected net banking");
+          //  $window.location.href=".client/views/paymentgateways.html";
+           // location.path="./paymentgateways.html";
+           $location.path("/customer/paymentgateways");
+          // $window.location.href = 'paymentgateways.html';
+            
+        }
+        else{
+            console.log("you have selected cod");
     let promise=customerformfactory.customerform($scope.user);
     console.log("Promise received in controller");
     promise.then(data=>{
@@ -20,7 +33,7 @@ customerapp.controller("customerform-controller",function($scope,customerformfac
       $scope.data=data;
      
      if(data.data.status=='S' ){
-
+ $scope.message=data.data.message;
        
           console.log("customer form submitted  succesfully");
           
@@ -33,6 +46,6 @@ customerapp.controller("customerform-controller",function($scope,customerformfac
       console.log("controller error",err);
       $scope.err=err;
     
-    })
+    })}
 }
 })

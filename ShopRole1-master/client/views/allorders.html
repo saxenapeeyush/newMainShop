@@ -1,0 +1,102 @@
+<h1>All Orders</h1>
+<div ng-controller="allorders-controller">
+    <!-- <input type="date" ng-model="date"> <br>
+    <button class="updateBtn" ng-click="particularOrders()">View orders of selected date</button> <br> <br> -->
+    <button class="updateBtn" ng-click="allOrders()">View All Orders</button> <br> <br>
+    <!-- {{orderdetails}} -->
+    <div class="limiter">
+        <div >
+            <div class="wrap-table100">
+                <div class="table100">
+                    <table ><thead >
+                            <tr class="table100-head"  >
+                                    <th  > Order Status</th>
+                                    <th  > Address</th>
+                                    
+                                   
+                                    <th  > Payment Status</th>
+                                    <th  >Name</th>
+                                    
+                                    <th  > User Email</th>
+                                    <!-- <th  >Order Id </th> -->
+                                    <th  >Billing Amount </th>
+                                   
+                                    <th>Details </th>
+                                    <th>Status</th></tr>
+                        </thead>
+                        <tbody>
+                          
+                                  
+                               <tr dir-paginate="x in orderdetails|itemsPerPage:10">
+                                        
+                                
+                                    <td class="coloumn_1">{{x.orderStatus|uppercase}}</td>
+                                    <td class="coloumn_1">{{x.deliverAddress}},{{x.state}},{{x.country}}</td>
+                                    
+                                    <td class="coloumn_1">{{x.paymentStatus|uppercase}}</td>
+                                        <td class="coloumn_1">{{x.firstName
+                                            }} {{x.lastName
+                                            }}</td>
+                                            
+                                        <td class="coloumn_1">{{x.mail
+                                            }}</td>
+                                            <!-- <td class="coloumn_1">{{x.orderId
+                                                }}</td> -->
+                                                
+                                                <td class="coloumn_1">{{x.orderBillingAmount|currency:"&#8377;" }}</td>
+
+                                           
+                                        <td class="coloumn_1"> <button class="updateBtn" ng-click="clickToOpen(x.orderDetails,x.orderId)">Details</button></td>
+                                
+                                     
+                                        <!-- <td class="productDetails" ng-repeat-start="items in x.orderDetails"> -->
+<!-- <div>
+    <p>Product Name {{items.productName}}</p>
+    <p>Product Size {{items.shoesize
+        }}</p>
+        <p>Product Prize {{items.actualPrice
+            }}</p>
+            <p>Product Sub Total {{items.subTotal}}</p>
+</div> -->
+
+<!-- {{items.productName}}
+                                        </td>
+                                        <td ng-repeat-end></td> -->
+                                                
+                                                <!-- <td>{{items.shoesize
+                                                    }}</td>
+                                                    <td>{{items.quantity
+                                                        }}</td>
+                                                        <td>{{items.actualPrice
+                                                            }}</td> -->
+                                                            
+                                       
+                                            
+                                       <!-- <td class="coloumn_1">  {{x.orderDetails}}</td>  -->
+                                        <!-- <div ng-repeat="items in x.orderDetails">
+                                                <td>{{items.productName}}</td>
+                                                <td>{{items.quantity}}</td>
+                                            </div> -->
+                               
+                                    <!-- <td class="column_2" ng-if="readmore">{{x.roleDesc | limitTo:20}}<button ng-if="readmore" ng-click="readmore()">Read More</button> </td>
+                                    <td class="column_2" ng-if="!readmore">{{x.roleDesc}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium minus eos tempora doloremque, laudantium eligendi cum voluptas maxime odit nihil nostrum nesciunt voluptatem, recusandae ducimus totam, est in a neque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi aliquam fuga eaque quod delectus unde est deserunt nobis cum, amet voluptatum aperiam temporibus soluta ducimus minus tenetur voluptatibus numquam minima.
+                
+                                         <button ng-if="readmore" ng-click="readmore()" class="btn btn-success">Read More</button> </td>
+                                    <td class="column_3" ng-class="({{x.roleStatus}}==Active) ? 'enabled' : 'disabled'">{{x.roleStatus}} <i class="fa fa-check-circle" aria-hidden="true"></i></td> 
+                                    
+                                    
+                                    
+                                
+                               -->
+                            </tr>
+                                
+                        </tbody>
+                    </table>
+                    <div class="pagination">
+                        <dir-pagination-controls></dir-pagination-controls>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

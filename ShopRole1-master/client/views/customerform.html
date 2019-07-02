@@ -35,6 +35,7 @@
         <div class="container" controller="customerform-controller">
 
                 <h1>Checkout</h1> <hr>
+                <h1>{{message}}</h1>
                    <div id="content">
                        <div>  <b>  Name & Address</b>
                           <hr>
@@ -154,9 +155,9 @@
                               </div></div> 
 
                        <div> <b>Payment Method</b><hr> 
-                        <input type ="radio" name="paymentmethod" value="COD" ng-model="user.payment" />Cash on Delivery<br />
+                        <input type ="radio" name="paymentmethod" checked="checked" value="COD" ng-model="user.payment" />Cash on Delivery<br />
 
-<input type ="radio" name="paymentmethod" value="NB" ng-model="user.payment" />Net Banking  <br> <br>
+<!-- <input type ="radio" name="paymentmethod" value="NB" ng-model="user.payment" />Net Banking  <br> <br> -->
 
                         <button type="submit" ng-click="submit()"class="checkOut">Check Out</button></div>
                    </div>

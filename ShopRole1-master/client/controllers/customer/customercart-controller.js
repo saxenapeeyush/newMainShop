@@ -17,6 +17,8 @@ customerapp.controller("customercart-controller",function($rootScope,$window,$sc
         },acc=0)
         console.log("total is",total);
         $scope.billingAmount=total;
+        $rootScope.amountToBePaid= $scope.billingAmount;
+        console.log($rootScope.amountToBePaid);
     })
    // $scope.cartproducts=$rootScope.customerCartProducts;
   

@@ -1,0 +1,1 @@
+const deliveryapp=angular.module("deliveryapp",['ngRoute','ngFileUpload']);

@@ -12,8 +12,19 @@ const ProdSchModel=require('../../models/admin/products/productSchema');
 const roleRight=require('../../../models/admin/roleRightModel');
 const hashPass=require('../../../utils/bcrypt');
 const indexCountSchema=require('../../models/admin/Dealoftheday/indexCountSchema');
+const orderSchema=require('../../models/customer/orderSchema');
 
 const adminOperations = {
+    getAllOrders(res){
+        orderSchema.find({},(err,doc)=> {
+            if(err) {
+                res.status(500).json({status:config.ERROR,message:"Error while finding the orders of the admin panel "})
+            }
+            else{
+                res.status(200).json({status:config.SUCCESS,message:"Orders fetched successfully",doc:doc});
+            }
+        })
+    },
     addAdmin(){
         let hashPassword=hashPass.convertPassword(config.ADMINPASS);
         let adminObject = new adminAddModel(config.ADMIN,hashPassword,config.ADMINSTATUS,config.ISFIRSTTIME);

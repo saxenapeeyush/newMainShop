@@ -3,6 +3,10 @@ dashboardapp.config(function($routeProvider, $locationProvider){
     $locationProvider.hashPrefix('');
     $routeProvider.when('/addUser',{
         templateUrl:'./views/addUser.html'
+    }) .when('/deliveryboys',{
+        templateUrl:'./views/deliveryboys.html',
+        controller:'alldeliveryboys-controller'
+      
     })
     .when('/addRole',{
         templateUrl:'./views/addRole.html',
@@ -28,6 +32,10 @@ dashboardapp.config(function($routeProvider, $locationProvider){
      
     }).when('/dealoftheday',{
         templateUrl:'./views/dealoftheday.html'
+     
+    })
+    .when('/allorders',{
+        templateUrl:'./views/allorders.html'
      
     })
    
