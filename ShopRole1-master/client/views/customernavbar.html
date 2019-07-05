@@ -40,13 +40,13 @@
   </button>
   <!-- {{data}} -->
   <span class="nav-item dropdown" ng-if="isLoggedIn">
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="nav-link dropdown-toggle customerName" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <b>{{name}}</b>
     </a>
     <div class="dropdown-menu" style="margin:0px;" aria-labelledby="navbarDropdown">
-      <a class="dropdown-item" style="background-color: #F8F9FA; margin:0px;" href="#/customer/orders">My Orders</a>
-      <a class="dropdown-item" style="background-color:#F8F9FA; margin:0px;" ng-click="signOut()" ng-if="isLoggedIn">
-        Sign Out
+      <a class="dropdown-item pointer" style="background-color: #F8F9FA; margin:0px;" href="#/customer/orders">My Orders <span><i class="fas fa-truck"></i></span></a>
+      <a class="dropdown-item pointer" style="background-color:#F8F9FA; margin:0px;" ng-click="signOut()" ng-if="isLoggedIn">
+        Sign Out <span class="signOut"> <i class="fas fa-sign-out-alt"></i></span>
       </a>
       <!-- <a class="dropdown-item" href="#">Another action</a>
       <div class="dropdown-divider"></div>

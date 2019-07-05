@@ -21,7 +21,7 @@
   <p>Click <a href="#/">here</a>  to continue shopping.</p>
            </div>
            <div > -->
-         <div class="container-fluid">
+         <div class="container">
             <div class="row marginTop">
                <div class="col-9">
                   <h1 class="topicShop">MY ORDERS</h1>
@@ -35,7 +35,7 @@
             </div>
          </div>
      
-           <div class="container-fluid">
+           <div class="container">
               <div class="row cartTopic">
                  <div class="col-4">
                     <h6>ORDER DATE</h6>
@@ -51,20 +51,14 @@
                         <h6>VIEW ORDER Details</h6>
                      </div>
               </div>
-              <!-- {{cartproducts}}{{addedcartproducts}} <hr> <h1>data</h1> -->
-              <!-- {{data.data.docs}} <h1>{{numberofproducts}}</h1> -->
-              <!-- {{customercartProducts}} -->
-              <!-- {{customerCartProducts}} -->
-              <div class="cartItem" ng-repeat="x in allOrders">
+              <div class="cartItem" dir-paginate="x in allOrders |itemsPerPage:5">
                     <div class="row">
-                            <div class="col-4">
-                               <!-- <div class="cartImage"><img ng-src="{{item.prodImgUrl}}" alt="{{item.productName}}"></div> -->
-                               {{x.orderDateAndTime
-                               }}
+                            <div class="col-4 allDate">
+                               {{x.orderDateAndTime|date:'EEEE, MMM d, y'}}
                                
                             </div>
                             <div class="col-3">
-                                    <p class="cartProductBrand">{{x.orderStatus}}</p>
+                                    <p class="cartProductBrand">{{x.orderStatus|uppercase}}</p>
                                    
                             </div>
                         <div class="col-2">
@@ -72,140 +66,25 @@
                                     </div>
                                     <div class="col-3">
                                         <a ng-href="#/customer/myorders/{{x.orderId
-                                        }}">{{x.orderId
-                                        }}</a>
+                                        }}"><button class="checkOut">View Order <i class="fas fa-truck"></i></button></a>
                                                 </div>
                    </div>
                 </div>
-                 <!-- <h1>Produts coming from db</h1> -->
-                 <!-- <div class="col-4">
-                    <div class="row">
-                       <div class="col-4">
-                           <div class="cartImage"><img ng-src="{{item.prodImgUrl}}" alt="{{item.productName}}"></div> 
-                          {{x.orderDateAndTime
-                          }}
-                          
-                       </div>
-                       <div class="col-8">
-                          <p class="cartProductBrand">{{x.orderStatus}}</p>
-                          <p><strong>{{x.orderBillingAmount}}</strong></p>
-                          <div>
-              <div class="row cartItem" ng-repeat="x in allOrders">
-                            
-                          </div>
-                          <div class="editRemove"> 
-                              <button>VIEW ORDER DETAILS</button>
-                              
-  
-                      
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-          
-                 <div class="col-3">
-                    <p>{{item.actualPrice|currency:"&#8377;"}}</p>
-                 </div>
-                 <div class="col-3">
-                   <p>{{item.quantity}}</p>
-                 </div>
-                 <div class="col-2">
-                    <p>{{item.subTotal|currency:"&#8377;"}}</p>
-                 </div>
               </div>
-              <div class="row cartItem" ng-repeat="item in customerCartProducts">
-                 <h1>Products coming from localstorage</h1>
-                 <div class="col-4">
-                    <div class="row">
-                       <div class="col-4">
-                          <div class="cartImage"><img ng-src="{{item.prodImgUrl}}" alt="{{item.productName}}"></div>
-                       </div>
-                       <div class="col-8">
-                          <p class="cartProductBrand">{{item.productBrand}}</p>
-                          <p><strong>{{item.productName}}</strong></p>
-                          <div>
-                             <p><strong>Size:</strong> {{item.shoesize}}</p>
-                          </div>
-                          <div class="editRemove">
-                              <button>Edit</button><br>
-                              <button ng-click="removeItem(item)">Remove Item</button>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-          
-                 <div class="col-3">
-                    <p>{{item.actualPrice|currency:"&#8377;"}}</p>
-                 </div>
-                 <div class="col-3">
-                   <p>{{item.quantity}}</p>
-                 </div>
-                 <div class="col-2">
-                    <p>{{item.subTotal|currency:"&#8377;"}}</p>
-                 </div>
-              </div>
+              <div class="pagination">
+               <dir-pagination-controls></dir-pagination-controls>
+             </div>
   
-           </div> -->
+           </div>
            <div class="container-fluid">
               <div class="row">
                  <div class="col-12 emptyShopping">
-                    <!-- <button>EMPTY CART</button> -->
-      <button > <a href="#/" style="text-decoration: none;">CONTINUE SHOPPING</a>
+
+      <button > <a href="#/" style="text-decoration: none;"><button class="checkOut">Continue Shopping</button></a>
          </button>
                  </div>
               </div>
            </div>
-          <div class="container">
-              <div class="row">
-                    <div class="col-6">
-        
-                    </div>
-                    <div class="col-6">
-                       <div class="row billDetails">
-                          <div class="col-12"><p class="credit" style="text-align-last: center;    margin-left: 50%">CUSTOMER CREDIT</p></div>
-                          <div class="col-12">
-                             <div class="row">
-                                <div class="col-8"><p>SUBTOTAL</p></div>
-                                <div class="col-4"><p class="billAmount">{{billingAmount|currency:"&#8377;"}}</p></div>
-                             </div>
-                          </div>
-                          <div class="col-12">
-                                <div class="row">
-                                   <div class="col-8"><p>SHIPPING & HANDLING (STANDARD SHIPPING - FIXED)</p></div>
-                                   <div class="col-4"><p class="billAmount">₹ 0.00</p></div>
-                                </div>
-                             </div>
-                             <div class="col-12">
-                                   <div class="row">
-                                      <div class="col-8"><p class="grand">GRAND TOTAL (INCL. OF GST)</p></div>
-                                      <div class="col-4"><p class="billAmount mainAmount">{{billingAmount|currency:"&#8377;"}}</p></div>
-                                   </div>
-                                </div>
-                                <div class="col-12">
-                                      <div class="col-12">
-                                            <a class="checkOut" ng-show="!isLoggedIn" href="#">PROCEED TO CHECKOUT</a>
-                                            <a  class="checkOut" ng-show="isLoggedIn" href="#/customer/addressform">PROCEED TO CHECKOUT</a>
-                                            <!-- <button class="checkOut"  ng-show="!isLoggedIn" ng-click="">PROCEED TO CHECKOUT</button>
-                                  <button class="checkOut"  ng-show="isLoggedIn" ng-click="">PROCEED TO CHECKOUT</button> -->
-                                        </div>
-                                </div>
-                                
-                       </div>
-                       <!-- <div class="row">
-                          <div class="col-8">SUBTOTAL</div>
-                          <div class="col-8">    SHIPPING & HANDLING (STANDARD SHIPPING - FIXED) </div>
-                          <div class="col-8"> <h3>GRAND TOTAL (INCL. OF GST)</h3> </div> 
-        
-                       </div> -->
-                     <!-- <div class="col-4">{{billingAmount}}</div>
-                       <div class="col-4">0.00</div>
-                       <div class="col-4"> <h3>   {{billingAmount}}</h3> -->
-                       </div>
-        
-                         
-                       </div>
-                       
-                 </div>
           </div>
         </div>
    </div>  

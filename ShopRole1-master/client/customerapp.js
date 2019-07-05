@@ -1,4 +1,4 @@
-const customerapp=angular.module("customerapp",['ngRoute','ngDialog', 'jcs-autoValidate']);
+const customerapp=angular.module("customerapp",['ngRoute','ngDialog', 'jcs-autoValidate','angularUtils.directives.dirPagination']);
 
     //     customerapp.run([
     //     'bootstrap3ElementModifier',
