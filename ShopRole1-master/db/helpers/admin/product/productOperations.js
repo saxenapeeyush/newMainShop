@@ -1,6 +1,21 @@
 const productSchModel=require('../../../models/admin/products/productSchema');
 const config=require('../../../../utils/config');
+const orderSchema=require("../../../models/customer/orderSchema");
 const productOperations = {
+    findSpecificOrder(orderid,res){
+orderSchema.findOne({orderId:orderid},(err,doc)=>{
+    if(err){  res.status(500).json({status:config.ERROR,message:"Error while findng the order from the database"});   
+
+    }else{
+        if(doc){
+            res.status(200).json({status:config.SUCCESS,message:"Successfully fetched the orders",doc:doc});
+        }
+        else{
+            res.status(404).json({status:config.NOT_FOUND});
+        }
+    }
+})
+    },
     uploadProduct(productObject,res) {
         productSchModel.create(productObject,(err,doc)=> {
             if(err) {

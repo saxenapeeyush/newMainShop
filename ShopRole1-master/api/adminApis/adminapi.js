@@ -4,6 +4,7 @@ const adminRoleOperations =require('../../db/helpers/admin/adminRoleOperations')
 const adminRoleModel=require('../../models/admin/adminrolemodel');
 const productOperations =require('../../db/helpers/admin/product/productOperations');
 const compare=require('../../utils/comparePass');
+const deliveryBoyOperations=require('../../db/helpers/deliveryBoy/deliveryBoyOperations');
 const path=require('path');
 const process=require('process');
 const os=require('os');
@@ -16,6 +17,11 @@ const upload=require("../../utils/multer");
 const ProdImgUpload=require('../../models/admin/products/prodImgUpload');
 const imageUpload=require('../../utils/multernew');
 const tokenMiddleware=require("../../utils/tokenmiddleware");
+adminApi.post("/addNewRole",(req,res)=>{
+    let roleName=req.body.roleName;
+    let roleDesc=req.body.roleDesc;
+    adminOperations.addNewRole(roleName,roleDesc,res);
+})
 adminApi.get('/allorders',(req,res)=> {
     adminOperations.getAllOrders(res);
 })
@@ -27,7 +33,7 @@ adminApi.get('/allorders',(req,res)=> {
 // .end(function (result) {
 //   console.log(result.status, result.headers, result.body);
 // });
-adminApi.post("/uploadDealImage",(req,res)=>{
+adminApi.post("/uploadDealImage",tokenMiddleware,(req,res)=>{
     imageUpload(req,res,(err)=>{
         if(err){
             res.status(500).json({status:config.ERROR,message:"Error uploading file try again"});
@@ -61,7 +67,7 @@ adminApi.post("/uploadDealImage",(req,res)=>{
 
 
 })
-adminApi.post("/uploadImage",(req,res)=>{
+adminApi.post("/uploadImage",tokenMiddleware,(req,res)=>{
     // adminOperations.uploadProdImage(req,res);
     // upload(req,res,(err)=>{
     //     if(err){
@@ -103,7 +109,7 @@ adminApi.post("/uploadImage",(req,res)=>{
        
     })
 })
-adminApi.post("/newupload",(req,res)=>{
+adminApi.post("/newupload",tokenMiddleware,(req,res)=>{
     upload(req,res,(err)=>{
         if(err){
             res.status(500).json({status:config.ERROR,message:"Error uploading file try again"});
@@ -133,11 +139,11 @@ adminApi.post("/newupload",(req,res)=>{
     
     })
 })
-adminApi.get("/getallproducts",(req,res)=>{
+adminApi.get("/getallproducts",tokenMiddleware,(req,res)=>{
     productOperations.getAllProducts(res);
 
 });
-adminApi.get("/getRecoverproducts",(req,res)=>{
+adminApi.get("/getRecoverproducts",tokenMiddleware,(req,res)=>{
     productOperations.getRecoverProducts(res);
 
 });
@@ -160,15 +166,31 @@ adminApi.get('/findAdmin',(req,res)=> {
 });
 adminApi.post('/login',(req,res)=> {
     let adminName=req.body.adminName.trim();
-    let adminPassword=req.body.adminPassword.trim();
+    if(adminName==config.ADMIN) {
+        let adminPassword=req.body.adminPassword.trim();
     if(adminName==config.ADMIN) {
         adminOperations.loginAdmin(adminName,adminPassword,res);
     }
+    
     else {
         res.status(200).json({status:config.ERROR,message:"Username or Password doesn't match."});
     }
+    }
+    else{
+        let emailId=adminName;
+        let password=req.body.adminPassword;
+        console.log(emailId," " ,password);
+        let promise =deliveryBoyOperations.loginDeliveryBoy(emailId,password);
+        promise.then((rights)=> {
+            const jwt = require('../../utils/token');
+            const token = jwt.generateToken(emailId);
+            res.status(200).json({token:token,rights:rights.adminRights,status:config.SUCCESS});
+        }).catch(err=> {
+            res.status(500);
+        })
+    }
 });
-adminApi.post('/addRole',(req,res)=> {
+adminApi.post('/addRole',tokenMiddleware,(req,res)=> {
     let roleName=req.body.roleName.trim();
     let roleDesc=req.body.roleDesc.trim();
     let roleStatus=req.body.roleStatus.trim(); // roleStatus can only be Active or Inactive 
@@ -183,9 +205,10 @@ adminApi.post('/addRole',(req,res)=> {
         } 
     });
 });
-adminApi.get('/allRoles',(req,res)=> {
+adminApi.get('/allRoles',tokenMiddleware,(req,res)=> {
     adminRoleOperations.findAllRoleNames(res);
 });
+
 adminApi.get('/getAdminData',(req,res)=> {
     res.send("Hello");
 });

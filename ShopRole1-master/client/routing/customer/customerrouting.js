@@ -6,6 +6,10 @@ customerapp.config(function($routeProvider, $locationProvider){
     }) .when('/customer/product/:productDesc',{
         templateUrl:'./views/individualproduct.html'
       
+    }).when('/customer/orders',{
+        templateUrl:'./views/customerorders.html',
+        controller:'customerorders-controller'
+      
     }).when('/customer/cart',{
         templateUrl:'./views/customercart.html'
       
@@ -24,6 +28,10 @@ customerapp.config(function($routeProvider, $locationProvider){
     .when('/customer/paymentgateways',{
         templateUrl:'./views/paymentgateways.html',
         controller:'paymentgateways-controller'
+      
+    }).when('/customer/myorders/:orderid',{
+        templateUrl:'./views/individualorder.html',
+        controller:'individualorder-controller'
       
     })
    

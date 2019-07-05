@@ -31,15 +31,21 @@ app.controller("admin-controller",function(adminfactory,$scope,$window,$rootScop
        promise.then(data=>{
          console.log("controller then called",data);
          $scope.data=data;
-         if(data.data.status=="S" ){
-          localStorage.tokenId = data.data.token ;
+         if(data.data.status=="S"  ){
+        
           console.log("Token given succesfully");
+          if(data.data.doc){
+            localStorage.tokenId = data.data.token ;
           console.log("data is",data.data.doc);
           
 
           localStorage.rights=JSON.stringify(data.data.doc);
+          $window.location.href="dashboardtemplate.html";}
+          else if(data.data.rights){  
+            localStorage.tokenId = data.data.token ; 
+                   localStorage.rights=JSON.stringify(data.data.rights);
          $window.location.href="dashboardtemplate.html";
-                    
+        }
              
         
             
@@ -83,10 +89,12 @@ app.controller("admin-controller",function(adminfactory,$scope,$window,$rootScop
          console.log("controller error",err);
          $scope.err=err;
        
-       })}
+       })
+      }
     
     
     $scope.adminFirstLogin=()=>{
+
         console.log("data is",$scope.admin.adminName,"--");
         
           

@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const config = require('./config');
 const tokenOperations = {
     generateToken(id){
-        var token = jwt.sign({id }, config.SECRET,{ expiresIn: '1h' });
+        var token = jwt.sign({id }, config.SECRET,{ expiresIn: '10h' });
         return token;
     },
     verifyToken(token){

@@ -5,6 +5,10 @@ const config=require('../../../utils/config');
 const userOrderMap=require('../../../models/users/userorderMap');
 const OrderModel=require('../../../models/users/orderModel');
 const customerOrderOperations = {
+    async findAllOrders(emailId,res) {
+        let userId=await customerOperations.findUserByMail(emailId);
+        this.findAllOrdersOfUser(userId,res);
+    },
     async addUserOrderMap(userOrderMapObject) {
         return new Promise((resolve,reject)=> {
             userOrderMapSchema.create(userOrderMapObject,(err,doc)=> {

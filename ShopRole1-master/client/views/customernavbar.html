@@ -39,10 +39,22 @@
     Sign In
   </button>
   <!-- {{data}} -->
-  <a href="#" style="text-decoration: none;"><b>{{name}}</b></a>
-  <button type="button" class="checkOut" ng-click="signOut()" ng-if="isLoggedIn">
-    Sign Out
-  </button>
+  <span class="nav-item dropdown" ng-if="isLoggedIn">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <b>{{name}}</b>
+    </a>
+    <div class="dropdown-menu" style="margin:0px;" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" style="background-color: #F8F9FA; margin:0px;" href="#/customer/orders">My Orders</a>
+      <a class="dropdown-item" style="background-color:#F8F9FA; margin:0px;" ng-click="signOut()" ng-if="isLoggedIn">
+        Sign Out
+      </a>
+      <!-- <a class="dropdown-item" href="#">Another action</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Something else here</a> -->
+    </div>
+  </span>
+  
+  <!-- <a href="#" style="text-decoration: none;"><b>{{name}}</b></a> -->
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -74,18 +86,38 @@
                   <h6>OR EMAIL</h6>
 
               </div>
+              <form name="loginform" novalidate ng-submit="loginform.$valid && login.submit()">
+                  <div class="form-group"> 
+                      <label for="loginemail">Email<span class="starImp">*</span></label>
+                      <input type="text" class="form-control" id="loginemail" name="loginemail"  ng-required="true" ng-model="user.email">
+                      <div ng-show="loginform.$submitted || loginform.loginemail.$touched">
+                          <span ng-show="loginform.loginemail.$touched  && loginform.loginemail.$error.required" class="error-msg">This field is required.</span>
+                          
+                        </div>
+                    </div>
+                    <div class="form-group"> 
+                        <label for="loginpassword">Password<span class="starImp">*</span></label>
+                        <input type="password" class="form-control" id="loginpassword" name="loginpassword"  ng-required="true" ng-model="user.password">
+                        <div ng-show="loginform.$submitted || loginform.loginpassword.$touched">
+                            <span ng-show="loginform.loginpassword.$touched  && loginform.loginpassword.$error.required" class="error-msg">This field is required.</span>
+                           
+                          </div>
+                      </div>
+              <!-- <div class="col-12">
+                  <input type="text" autocomplete="off" ng-required="true" ng-model="user.email" name="email" placeholder="Email Address*">
+                  <p class="errormessage"  ng-show="form.email.$touched  && form.email.$error.required">Email Required. </p>
+              </div> -->
+               
+              <!-- <div class="col-12">
+                  <input type="password" ng-required="true" ng-model="user.password" name="password" placeholder="Password*">
+                  <p class="errormessage"  ng-show="form.password.$touched  && form.password.$error.required">Password Required. </p>
+              </div> -->
+              
               <div class="col-12">
-                  <input type="text" ng-model="user.email" placeholder="Email Address*">
+                  <!-- <button ng-disabled="myForm.$invalid">Save</button> -->
+                  <button   ng-click="loginwithoutEmail()">LOGIN</button>
 
-              </div> <br>
-              <div class="col-12">
-                  <input type="password" ng-model="user.password" placeholder="Password*">
-
-              </div>
-              <div class="col-12">
-                  <button ng-click="loginwithoutEmail()">LOGIN</button>
-
-              </div><br>
+              </div> </form><br> <br>
               <div class="col-12">
                <p>New User? <a href="#/customer/register">Register</a>
                </p>

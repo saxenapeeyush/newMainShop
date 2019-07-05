@@ -1,4 +1,14 @@
-dashboardapp.controller("addRole-controller",function($scope,addRolefactory){
+dashboardapp.controller("addRole-controller",function($scope,addRolefactory,ngDialog){
+  $scope.clickToOpen=function(){
+    console.log("pressed");
+    
+     ngDialog.open({ template: 'addRoleTemplate.html',
+ controller:'addroletemplate-controller',
+  
+   scope: $scope
+      , className: 'ngdialog-theme-default',width: '55%'});
+  
+  }
   $scope.readmore = true;
   
 $scope.readmore=function(){

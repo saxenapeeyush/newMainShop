@@ -1,8 +1,7 @@
 const dashboardapp=angular.module("dashboardapp",['ngRoute','ngFileUpload','ngDialog','angularUtils.directives.dirPagination']);
-// dashboardapp.config(function($httpProvider) {
-//     $httpProvider.interceptors.push('AuthInterceptor');
-
-// });
+dashboardapp.config(function($httpProvider) {
+    $httpProvider.interceptors.push('AuthInterceptor');
+});
 dashboardapp.constant('PRODUCT_URL','http://localhost:1234/getallproducts');
 dashboardapp.constant('RECOVERPRODUCT_URL','http://localhost:1234/getRecoverproducts');
 dashboardapp.constant('GETALLDEALS_URL','http://localhost:1234/deal/getAllDeals');

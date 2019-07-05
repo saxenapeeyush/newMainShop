@@ -10,10 +10,11 @@ class adminRightMapping {
 }
 $scope.adminRights=JSON.parse(localStorage.rights);
 // localStorage.removeItem("rights");
+console.log(localStorage.rights);
 $scope.adminRights=$scope.adminRights.map((object)=> {
     return new adminRightMapping(object.rightName,object.rightUri);
 });
-console.log("Rights",$scope.adminRights);
+console.log("Rights____________",$scope.adminRights);
 $scope.chahat=()=>{
     console.log("pressed");
     

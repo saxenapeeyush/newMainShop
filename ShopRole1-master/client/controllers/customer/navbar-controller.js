@@ -55,8 +55,11 @@ customerapp.controller("navbar-controller",function($rootScope,$window,$scope,cu
             $window.location.reload();
             $scope.isLoggedIn=false;
            
+           
     }
     $scope.loginwithoutEmail=()=>{
+      if($scope.loginform.$invalid){ return false;}
+      else{
         console.log("Pressed login");
         console.log($scope.user);
         if(localStorage) {
@@ -109,5 +112,6 @@ customerapp.controller("navbar-controller",function($rootScope,$window,$scope,cu
           $scope.err=err;
         })
     }
+  }
 
 })

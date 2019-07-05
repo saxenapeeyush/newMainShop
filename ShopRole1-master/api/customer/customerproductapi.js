@@ -7,6 +7,13 @@ const cartModel=require('../../models/users/cartModel');
 const config=require('../../utils/config');
 const bcrypt=require('../../utils/bcrypt');
 const customerOperations =require('../../db/helpers/customer/customerOperations');
+
+
+customerRoutes.post('/allorders',(req,res)=>{
+    console.log(req.body);
+    let email=req.body.userEmail;
+    customerOrderOperations.findAllOrders(email,res);
+})
 customerRoutes.post('/addOrder',(req,res)=> {
     console.log("Hello I am add order ");
     let address1=req.body.address1;
@@ -89,6 +96,15 @@ customerRoutes.get('/getDealProducts',(req,res)=> {
 });
 customerRoutes.get("/getCustomerProducts",(req,res)=>{
     productOperations.getCustomerProducts(res);
+});
+customerRoutes.get('/myorders/:orderid',(req,res)=> {
+    let orderid=req.params.orderid;
+    console.log(orderid);
+    // let productArray=productDesc.split('_');
+    // console.log(productArray);
+    // let productId=productArray[1];
+    // console.log(productId);
+    productOperations.findSpecificOrder(orderid,res); 
 });
 customerRoutes.get('/product/:productDesc',(req,res)=> {
     let productDesc=req.params.productDesc;

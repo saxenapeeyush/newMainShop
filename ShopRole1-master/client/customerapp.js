@@ -1,5 +1,38 @@
-const customerapp=angular.module("customerapp",['ngRoute','ngDialog']);
+const customerapp=angular.module("customerapp",['ngRoute','ngDialog', 'jcs-autoValidate']);
 
+    //     customerapp.run([
+    //     'bootstrap3ElementModifier',
+    //     function (bootstrap3ElementModifier) {
+    //           bootstrap3ElementModifier.enableValidationStateIcons(true);
+    //    }]);
+    //    customerapp  .run([
+    //     'validator',
+    //     'foundation5ElementModifier',
+    //     function (validator, foundation5ElementModifier) {
+    //         validator.setDefaultElementModifier(foundation5ElementModifier.key);
+    //     }]);
+customerapp.directive('confirmPassword', function(defaultErrorMessageResolver) {
+    defaultErrorMessageResolver.getErrorMessages().then(function(errorMessages) {
+      errorMessages['confirmPassword'] = 'Please ensure the passwords match.';
+    });
+  
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      scope: {
+        confirmPassword: '=confirmPassword'
+      },
+      link: function(scope, element, attributes, ngModel) {
+        ngModel.$validators.confirmPassword = function(modelValue) {
+          return modelValue === scope.confirmPassword;
+        };
+  
+        scope.$watch('confirmPassword', function() {
+          ngModel.$validate();
+        });
+      }
+    };
+  });
 customerapp.constant("DEALPRODUCTS_URL","http://localhost:1234/customer/getDealProducts");
 customerapp.constant("GETCUSTOMERCART_URL","http://localhost:1234/customer/getcustomercart");
 customerapp.constant("FINDUSER_URL","http://localhost:1234/login/user");

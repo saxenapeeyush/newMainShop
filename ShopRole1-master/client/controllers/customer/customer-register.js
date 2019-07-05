@@ -1,7 +1,8 @@
 customerapp.controller("customer-register",function($scope,customerregisterfactory){
     console.log("you are inside customer register controller");
     $scope.userRegister=()=>{
-        console.log("register pressed");
+      if($scope.form.$invalid){ return false;}
+else{        console.log("register pressed");
         console.log("$scope.user",$scope.user);
         let promise=customerregisterfactory.register($scope.user);
         console.log("promise received in controller");
@@ -20,5 +21,5 @@ customerapp.controller("customer-register",function($scope,customerregisterfacto
           $scope.err=err;
           $scope.showHide=false;
         })
-    }
+    }}
 })

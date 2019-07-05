@@ -1,5 +1,7 @@
 dashboardapp.constant("GETDATA_URL","http://localhost:1234/getAdminData");
 dashboardapp.constant("GETROLES_URL","http://localhost:1234/allRoles");
+dashboardapp.constant("ADDNEWROLES_URL","http://localhost:1234/addNewRole");
+
 dashboardapp.constant("UPLOAD_URL","http://localhost:1234/newupload");
 dashboardapp.constant("UPLOADIMAGE_URL","http://localhost:1234/uploadImage");
 dashboardapp.constant("UPDATEPRODUCT_URL","http://localhost:1234/product/updateProduct");

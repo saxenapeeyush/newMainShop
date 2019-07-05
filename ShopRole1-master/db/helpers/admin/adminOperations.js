@@ -13,6 +13,7 @@ const roleRight=require('../../../models/admin/roleRightModel');
 const hashPass=require('../../../utils/bcrypt');
 const indexCountSchema=require('../../models/admin/Dealoftheday/indexCountSchema');
 const orderSchema=require('../../models/customer/orderSchema');
+let shortId=require('shortid');
 
 const adminOperations = {
     getAllOrders(res){
@@ -66,6 +67,17 @@ findAdminUpdate(adminName,res) {
     }
 });
 },
+
+// findAdminID(adminName,res) {
+//     adminModel.findOne({adminName:adminName},(err,doc)=>{
+//         if(err){
+//             res.status(500).json({status:config.ERROR,message:"Error while finding the Admin after updation."})
+//            }   
+//         else{
+//             res.status(200).json({status:config.SUCCESS,message:"Find Admin data successful",data:doc.adminId});
+//     }
+// });
+// },
 addAdminRoleMapping(adminId,roleId) {
         let newAdRoleMapObj=new adRoleMap(adminId,roleId);
         adRoleMapModel.create(newAdRoleMapObj,(err,doc)=> {
@@ -81,6 +93,68 @@ addRoleRightMapping(roleId,rightId) {
             res.status(500).json({status:config.ERROR,message:"Error While adding the right role map"});
         }
     });
+},
+async findAdminID(adminName) {
+    console.log("Finding admin id");
+    return new Promise((resolve,reject)=> {
+        adminModel.findOne({adminName:adminName},(err,doc)=> {
+            if(err) {
+                console.log("error aa gyi in finding admin id");
+               reject(err);
+            }
+            else{
+                console.log("admin id mil gyi",doc.adminId);
+                resolve(doc.adminId);
+            }
+        })
+       })
+},
+
+async addNewRole(roleName,roleDesc,res){
+    // let roleName=req.body.roleName;
+    // let roleDesc=req.body.roleDesc;
+    console.log("inside add new role");
+    
+    let newRoleObject=new adminRoleModel(roleName,roleDesc,config.ROLE.ROLESTATUS);
+    console.log(newRoleObject);
+     roleModel.create(newRoleObject,(err,doc)=>{
+        if(err){res.status(500).json({status:config.ERROR,message:"Error while creating new role "});
+
+        }else{
+            let roleId=doc.roleId;
+            this.addRoleRightsDelivery(roleId,res);
+        }
+
+    })
+
+},
+addRoleRightsDelivery(roleId,res) {
+        let rights=[];
+        let deliveryRights=config.RIGHT.DELIVERYBOYRIGHTS;
+        for(let right of deliveryRights){
+            let newObject=new adminRightModel.adminRight(right.rightName,right.rightUri);
+            rights.push(newObject);
+        }
+        let newRightModel=new adminRightModel.AdminRights(config.RIGHT.rightStatus,rights);
+        rightModel.create(newRightModel,(err,docs)=> {
+            if(err){
+                res.status(500).json({status:config.ERROR,message:"Error while creating new rights "});
+            }
+            else{
+                if(docs){
+                    let rightId=docs.rightId;
+                    let newRoleRightMap = new roleRight(roleId,rightId);
+                    roleRightModel.create(newRoleRightMap,(err)=> {
+                        if(err) {
+                            res.status(500).json({status:config.ERROR,message:"Error while adding the delivery rights "});
+                        }
+                        else{
+                            res.status(200).json({status:config.SUCCESS,message:"Added All Rights and role"});
+                        }
+                    })
+                }
+            }
+        })
 },
 addAdminRoles(adminId,rightId) {
     let newRoleObject=new adminRoleModel(config.ROLE.ROLENAME,config.ROLE.ROLEADMINDESC,config.ROLE.ROLESTATUS);

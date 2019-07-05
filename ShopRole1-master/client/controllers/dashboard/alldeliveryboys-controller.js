@@ -54,6 +54,7 @@ dashboardapp.controller("alldeliveryboys-controller",function($window,$rootScope
         // let object = $scope.addedProducts.find((cur)=>cur._id==x._id);
         // console.log(object);
         $rootScope.identityProof=x;
+        
         // $rootScope.orderID=y;
   
        // $scope.object=object;
@@ -67,12 +68,12 @@ dashboardapp.controller("alldeliveryboys-controller",function($window,$rootScope
       //     console.log("you are in pop-up controller");
       // }],
      scope: $scope
-        , className: 'ngdialog-theme-default',width: '45%'});
+        , className: 'ngdialog-theme-default',width: '35%'});
     };
     $scope.getverifiedboys=()=>{
         console.log("get all verified boys");
         class Deliveryboy {
-          constructor(deliveryBoyId,firstName,lastName,dateOfBirth,emailId,address1,address2,verificationImageUrl,verified){
+          constructor(deliveryBoyId,firstName,lastName,dateOfBirth,emailId,address1,address2,imageVerification,verified){
               this.deliveryBoyId=deliveryBoyId;
               this.firstName=firstName;
               this.lastName=lastName;
@@ -80,7 +81,7 @@ dashboardapp.controller("alldeliveryboys-controller",function($window,$rootScope
               this.emailId=emailId;
               this.address1=address1;
               this.address2=address2;
-              this.verificationImageUrl=verificationImageUrl;
+              this.imageVerification=imageVerification;
               this.verified=verified;
           }
       }
@@ -93,7 +94,7 @@ dashboardapp.controller("alldeliveryboys-controller",function($window,$rootScope
          let newarray=array.map(object=>{
            let dob=object.dateOfBirth;
            let dobarray=dob.split("T");
-           return new Deliveryboy(object.deliveryBoyId,object.firstName,object.lastName,dobarray[0],object.emailId,object.address1,object.address2,object.verificationImageUrl,object.verified);
+           return new Deliveryboy(object.deliveryBoyId,object.firstName,object.lastName,dobarray[0],object.emailId,object.address1,object.address2,object.imageVerification,object.verified);
            
 
            
@@ -113,7 +114,7 @@ dashboardapp.controller("alldeliveryboys-controller",function($window,$rootScope
     $scope.getunverifiedboys=()=>{
         console.log("get all unverified boys");
         class Deliveryboy {
-          constructor(deliveryBoyId,firstName,lastName,dateOfBirth,emailId,address1,address2,verificationImageUrl,verified){
+          constructor(deliveryBoyId,firstName,lastName,dateOfBirth,emailId,address1,address2,imageVerification,verified){
               this.deliveryBoyId=deliveryBoyId;
               this.firstName=firstName;
               this.lastName=lastName;
@@ -121,7 +122,7 @@ dashboardapp.controller("alldeliveryboys-controller",function($window,$rootScope
               this.emailId=emailId;
               this.address1=address1;
               this.address2=address2;
-              this.verificationImageUrl=verificationImageUrl;
+              this.imageVerification=imageVerification;
               this.verified=verified;
           }
       }
@@ -132,7 +133,7 @@ dashboardapp.controller("alldeliveryboys-controller",function($window,$rootScope
           let newarray=array.map(object=>{
             let dob=object.dateOfBirth;
             let dobarray=dob.split("T");
-            return new Deliveryboy(object.deliveryBoyId,object.firstName,object.lastName,dobarray[0],object.emailId,object.address1,object.address2,object.verificationImageUrl,object.verified);
+            return new Deliveryboy(object.deliveryBoyId,object.firstName,object.lastName,dobarray[0],object.emailId,object.address1,object.address2,object.imageVerification,object.verified);
             
  
             

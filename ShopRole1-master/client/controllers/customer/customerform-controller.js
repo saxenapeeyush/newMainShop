@@ -1,5 +1,7 @@
 customerapp.controller("customerform-controller",function($location,$window,$rootScope,$scope,customerformfactory){
     $scope.user={};
+    
+   // $scope.my = { message: false };
     console.log("You are inside customerform controller");
     if(localStorage.userEmail){
         $scope.user.mail=JSON.parse(localStorage.userEmail);
@@ -11,6 +13,7 @@ customerapp.controller("customerform-controller",function($location,$window,$roo
         $scope.user.lastname=name[1];
     }
     $scope.submit=()=>{
+      //$scope.orderplaced=true;
         console.log("pressed");
         console.log("$scope.user",$scope.user);
         $rootScope.userAddressForm=$scope.user;
@@ -34,7 +37,8 @@ customerapp.controller("customerform-controller",function($location,$window,$roo
      
      if(data.data.status=='S' ){
  $scope.message=data.data.message;
-       
+//  $scope.orderplaced=false;
+$scope.my.message   = true;       
           console.log("customer form submitted  succesfully");
           
      
@@ -43,6 +47,7 @@ customerapp.controller("customerform-controller",function($location,$window,$roo
    }
    
     },(err)=>{
+
       console.log("controller error",err);
       $scope.err=err;
     

@@ -1,7 +1,9 @@
 const nodemailer = require("nodemailer");
 const userTemplate=require('./mailcontact');
-function mailUser(customerMailId,userName) { 
-    userTemplate(userName).then(data=> {
+// const generateOtp=require('../generateotp');
+function mailUser(mailId,Password) { 
+    // let generateOtpOrder=generateOtp.generateOrderOtp();
+    userTemplate(mailId,Password).then(data=> {
       var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -11,8 +13,8 @@ function mailUser(customerMailId,userName) {
        });
        const mailOptions = {
         from: 'shoprolebmpl@gmail.com',  
-        to: customerMailId, 
-        subject: "Thanks for Registering to PUMA ", 
+        to: mailId, 
+        subject: "One time Password (OTP) for your Order", 
         html: data 
       };
       transporter.sendMail(mailOptions, function (err, info) {

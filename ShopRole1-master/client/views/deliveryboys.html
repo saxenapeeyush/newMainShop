@@ -17,7 +17,7 @@
                                 <th  >Address</th>
                                 <th  >Email</th>
                                 
-                                <th  > Identity Proof</th>
+                                <th  >Proof</th>
                                 <th  > OPTIONS</th>
                                 </tr>
                     </thead>
@@ -29,17 +29,17 @@
                             
                                 <td class="coloumn_1">{{x.firstName|uppercase}} {{x.lastName|uppercase}}</td>
                                 <td class="coloumn_1">{{x.dateOfBirth}}</td>
-                                <td class="coloumn_1">{{x.address1}} , {{x.address2}}</td>
+                                <td class="coloumn_1">{{x.address1}} , {{x.address1}}</td>
                                 
                                 <td class="coloumn_1">{{x.emailId}}</td>
                                     
 
                                        
-                                    <td class="coloumn_1"> <button class="updateBtn" ng-click="clickToOpen(x.verificationImageUrl)">Identity Proof</button></td>
-                                    <td class="coloumn_1"> <button class="updateBtn" ng-click="unverifyBoy(x.deliveryBoyId)">Unverify</button></td>
+                                    <td class="coloumn_1"> <button class="updateBtn" ng-click="clickToOpen(x.imageVerification.verificationImageUrl)">Identity Proof</button> <button class="updateBtn" ng-click="clickToOpen(x.imageVerification.policeVerification)">Police Verification</button></td>
+                                    <td class="coloumn_1"> <button class="updateBtn" ng-click="unverifyBoy(x.deliveryBoyId)">Unverify Delivery Boy</button></td>
                             
                          
-                        </tr>
+                           </tr>
                             
                     </tbody>
                 </table>
@@ -66,7 +66,7 @@
                                             <th  >Address</th>
                                             <th  >Email</th>
                                             
-                                            <th  > Identity Proof</th>
+                                            <th  >Proof</th>
                                             <th  > OPTIONS</th>
                                             </tr>
                                 </thead>
@@ -78,14 +78,15 @@
                                         
                                             <td class="coloumn_1">{{x.firstName|uppercase}} {{x.lastName|uppercase}}</td>
                                             <td class="coloumn_1">{{x.dateOfBirth}}</td>
-                                            <td class="coloumn_1">{{x.address1}} , {{x.address2}}</td>
+                                            <td class="coloumn_1">{{x.address1}} , {{x.address1}}</td>
                                             
                                             <td class="coloumn_1">{{x.emailId}}</td>
                                                 
         
                                                    
-                                                <td class="coloumn_1"> <button class="updateBtn" ng-click="clickToOpen(x.verificationImageUrl)">Identity Proof</button></td>
-                                                <td class="coloumn_1"> <button class="updateBtn" ng-click="verifyBoy(x.deliveryBoyId)">Verify</button></td>
+                                                <td class="coloumn_1"> <button class="updateBtn" ng-click="clickToOpen(x.imageVerification.verificationImageUrl)">Identity Proof</button> <button class="updateBtn" ng-click="clickToOpen(x.imageVerification.policeVerification)">Police Verification</button></td>
+
+                                                <td class="coloumn_1"> <button class="updateBtn" ng-click="verifyBoy(x.deliveryBoyId)">Verify Delivery Boy</button></td>
                                         
                                      
                                     </tr>

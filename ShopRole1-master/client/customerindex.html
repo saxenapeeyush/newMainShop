@@ -315,8 +315,20 @@ border:1px solid #f30601;
             color:#f30601;
             font-size:13.5px;
         } 
+        .errormessage{
+            color:#f30601;
+            font-size: 12px;
+        }
+        .error-msg {
+            font-size:12px !important;
+            color:#f30601;
+        }
+        .starImp {
+            color:#f30601;
+        }
     </style>
     <script src="bower_components/angular/angular.min.js"></script>
+    <script src="https://cdn.rawgit.com/jonsamwell/angular-auto-validate/master/dist/jcs-auto-validate.js"></script>
     <script src="./bower_components/ng-dialog/js/ngDialog.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
     <script src="customerapp.js"></script>
@@ -330,6 +342,8 @@ border:1px solid #f30601;
     <script src="factory/customer/customernavbarfactory.js"></script>
     <script src="factory/customer/customercart-factory.js"></script>
     <script src="factory/customer/customerform-factory.js"></script>
+    <script src="factory/customer/customerorderfactory.js"></script>
+    <script src="factory/customer/individualorderfactory.js"></script>
     <script src="controllers/customer/customermain-controller.js"></script>
     <script src="controllers/customer/navbar-controller.js"> </script>
     <script src="controllers/customer/customersignin-controller.js"></script>
@@ -339,6 +353,9 @@ border:1px solid #f30601;
     <script src="controllers/customer/customer-register.js"></script>
     <script src="controllers/customer/customerform-controller.js"></script>
     <script src="controllers/customer/paymentgateways-controller.js"> </script>
+    <script src="controllers/customer/customerorders-controller.js"></script>
+    <script src="controllers/customer/individualorder-controller.js"></script>
+    
    
     
     <style>
