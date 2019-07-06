@@ -8,6 +8,17 @@ const cartSchema=require('../../models/customer/cartSchema');
 const cartModel=require('../../../models/users/cartModel');
 const bcrypt=require('../../../utils/bcrypt');
 const customerOperations = {
+    async deleteByCartId(cartId){
+    return new Promise((resolve,reject)=> {
+        cartSchema.deleteMany({cartId:cartId},(err)=> {
+            if(err){
+                  reject(err);
+            }else{
+               resolve(true);
+            }
+        })
+    })
+    },
     removeItemFromCart(cartId,cartItemId,res) {
         cartSchema.findOneAndRemove({cartId:cartId,cartItemId:cartItemId},(err,doc)=> {
             if(err) {

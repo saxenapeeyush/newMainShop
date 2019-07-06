@@ -7,7 +7,91 @@ const roleSchema=require("../../models/admin/roleSchema");
 const bcrypt=require("../../../utils/bcrypt");
 const roleRight=require("../../models/admin/roleRightMapSchema");
 const rightSchema=require("../../models/admin/rightSchema");
+const OrderDeliverySchema=require("../../models/DeliveryBoy/orderdelSchema");
 const deliveryBoyOperations =  {
+    async findDeliveryBoyId(deliveryBoyEmail) {
+        return new Promise((resolve,reject)=> {
+            deliveryBoySchema.find({emailId:deliveryBoyEmail},(err,doc)=> {
+                if(err) {
+                    reject(err);
+                }
+                else{
+                    resolve(doc.deliveryBoyId);
+                }
+            });
+        })
+    },
+    async findAllOrderIds(deliveryBoyId){
+        return new Promise((resolve,reject)=> {
+            OrderDeliverySchema.find({deliveryBoyId:deliveryBoyId},(err,docs)=> {
+                if(err){
+                    reject(err);
+                }
+                else{
+                    resolve(docs);
+                }
+            })
+        })
+    },
+    async findOrders(orders,orderStatus){
+        return new Promise((resolve,reject)=> {
+            let orderIdArray=[];
+        for(let order of orders) {
+            orderIdArray.push(order.orderId);
+        }
+        orderSchema.find({orderId:{ $in: orderIdArray },orderStatus:orderStatus},(err,docs)=> {
+            if(err) {
+                reject(err);
+            }
+            else{
+              resolve(docs);
+            }
+        })
+        })
+    },
+    async fetchPendingOrder(deliveryBoyEmail) {
+        let deliveryBoyId=await this.findDeliveryBoyId(deliveryBoyEmail);
+        let allOrderIds=await this.findAllOrderIds(deliveryBoyId);
+        let allOrders = await this.findOrders(allOrderIds,config.orderPlaced);
+        return allOrders;
+    },
+    async fetchPreviousOrder(deliveryBoyEmail) {
+        let deliveryBoyId=await this.findDeliveryBoyId(deliveryBoyEmail);
+        let allOrderIds=await this.findAllOrderIds(deliveryBoyId);
+        let allOrders = await this.findOrders(allOrderIds,config.orderDelivered);
+        return allOrders;
+    },
+    async fetchCurrentOrder(deliveryBoyEmail){
+        let deliveryBoyId=await this.findDeliveryBoyId(deliveryBoyEmail);
+        let allOrderIds=await this.findAllOrderIds(deliveryBoyId);
+        let allOrders = await this.findOrders(allOrderIds,config.orderOut);
+        return allOrders;
+    },
+    async addDelOrder(newDelOrderMap){
+        return new Promise((resolve,reject)=> {
+            OrderDeliverySchema.create(newDelOrderMap,(err,doc)=>{
+                if(err){
+                    reject(err);
+                }
+                else{
+                    resolve(doc);
+                }
+            })
+        })
+
+    },
+    async allotDeliveryBoy() {
+       return new Promise((resolve,reject)=> {
+        deliveryBoySchema.findRandom({verified:true}, {}, {limit: 1}, function(err, result) {
+           if(err) {
+               reject(err);
+           }
+           else{
+               resolve(result);
+           }
+          });
+       })
+    },
     async findRoleId(role) {
         return new Promise((resolve,reject)=> {
             roleSchema.findOne({roleName:role},(err,doc)=> {

@@ -1,4 +1,5 @@
 const mongoose = require('../../connection');
+const random = require('mongoose-simple-random');
 const deliveryBoySchema = mongoose.Schema;
 const config=require("../../../utils/config");
 const delBoy = new deliveryBoySchema({
@@ -18,5 +19,6 @@ const delBoy = new deliveryBoySchema({
     password:{type:String},
     role:{type:String,enum:['delivery'],default:'delivery'}
 });
+delBoy.plugin(random);
 const DelBoy = mongoose.model('deliveryboys',delBoy);
 module.exports=DelBoy;

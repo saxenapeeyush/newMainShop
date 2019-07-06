@@ -6,6 +6,9 @@ const config = {
     NOT_FOUND:'NF',
     EMPTY:'EM',
     ADMIN:'admin',
+    orderPlaced:"placed",
+    orderDelivered:"delivered",
+    orderOut:"out for delivery",
     ADMINPASS:'admin',
     excelMimeType :['application/vnd.ms-excel'],
     ROLE:{

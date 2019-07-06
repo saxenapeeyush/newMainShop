@@ -28,9 +28,19 @@ customerRoutes.post('/addOrder',(req,res)=> {
     let zipCode=req.body.zip;
     if(paymentMethod=='COD') {
         let newPromise=customerOrderOperations.makeOrderAndAdd(emailId,firstName,lastName,paymentMethod,fullAddress,zipCode,country,state);
-        newPromise.then((userId)=> {
+        newPromise.then((newOrder)=> {
+            console.log(newOrder);
             console.log("user id aa gayi ");
-            customerOrderOperations.findAllOrdersOfUser(userId,res);
+            let cartDeleted=customerOrderOperations.emptyCart(emailId);
+            cartDeleted.then((deleted)=>{
+                if(deleted){
+                    res.status(200).json({status:config.SUCCESS,message:"Your Order has been successfully placed."});
+                }
+                else{
+                    res.status(200).json({status:config.FAILURE,message:"Your Order has been placed but cart is not updated."});
+                }
+            })
+           
         }).catch(err=> {
             res.status(500).json({status:config.ERROR,message:"Error While adding the orders ",err:err});
         })

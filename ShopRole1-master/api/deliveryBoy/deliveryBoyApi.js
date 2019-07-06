@@ -1,5 +1,6 @@
 const deliveryBoyApi=require('express').Router();
 const multer=require('multer');
+const config=require('../../utils/config');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       console.log("Going to store data in disk")
@@ -63,5 +64,32 @@ deliveryBoyApi.get('/fetchVerified',(req,res)=> {
 });
 deliveryBoyApi.get('/fetchUnVerified',(req,res)=> {
     deliveryBoyOperations.fetchUnVerified(res);
-})
+});
+deliveryBoyApi.get('/pendingOrders',(req,res)=> {
+    let deliveryBoyEmailId=req.body.deliveryBoyEmail;
+    let fetchOrders=deliveryBoyOperations.fetchPendingOrder(deliveryBoyEmailId);
+  fetchOrders.then((allOrders)=> {
+    res.status(200).json({status:config.SUCCESS,message:"Fetched the products successfully ",allOrders:allOrders});
+  }).catch(err=> {
+    res.status(500).json({status:config.ERROR,message:"Error while finding the documents of orders ",error:err});
+  });
+});
+deliveryBoyApi.get('/previousOrders',(req,res)=> {
+  let deliveryBoyEmailId=req.body.deliveryBoyEmail;
+  let fetchOrders=deliveryBoyOperations.fetchPreviousOrder(deliveryBoyEmailId);
+fetchOrders.then((allOrders)=> {
+  res.status(200).json({status:config.SUCCESS,message:"Fetched the products successfully ",allOrders:allOrders});
+}).catch(err=> {
+  res.status(500).json({status:config.ERROR,message:"Error while finding the documents of orders ",error:err});
+});
+});
+deliveryBoyApi.get('/currentOrders',(req,res)=> {
+  let deliveryBoyEmailId=req.body.deliveryBoyEmail;
+  let fetchOrders=deliveryBoyOperations.fetchCurrentOrder(deliveryBoyEmailId);
+fetchOrders.then((allOrders)=> {
+  res.status(200).json({status:config.SUCCESS,message:"Fetched the products successfully ",allOrders:allOrders});
+}).catch(err=> {
+  res.status(500).json({status:config.ERROR,message:"Error while finding the documents of orders ",error:err});
+});
+});
 module.exports=deliveryBoyApi;

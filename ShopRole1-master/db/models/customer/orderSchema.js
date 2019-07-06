@@ -14,7 +14,9 @@ const order = new orderSchema({
     deliverAddress:{type:String},
     zipCode:{type:String},
     country:{type:String},
-    state:{type:String}
+    state:{type:String},
+    allotedTo:{type:String},
+    deliveryBoyEmailId:{type:String}
 });
 const Order = mongoose.model('orders',order);
 module.exports=Order;

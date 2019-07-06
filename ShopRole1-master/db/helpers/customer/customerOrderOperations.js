@@ -4,7 +4,16 @@ const customerOperations = require('../../../db/helpers/customer/customerOperati
 const config=require('../../../utils/config');
 const userOrderMap=require('../../../models/users/userorderMap');
 const OrderModel=require('../../../models/users/orderModel');
+const deliveryBoyOperations=require("../deliveryBoy/deliveryBoyOperations");
+const OrderDeliverySchema=require("../../models/DeliveryBoy/orderdelSchema");
+const OrderDeliveryModel=require("../../../models/DeliveryBoy/orderdelmapModel");
 const customerOrderOperations = {
+    async emptyCart(emailId){
+        let cartId=await customerOperations.findUserId(emailId);
+        let deleted=await customerOperations.deleteByCartId(cartId);
+
+        return deleted;
+    },
     async findAllOrders(emailId,res) {
         let userId=await customerOperations.findUserByMail(emailId);
         this.findAllOrdersOfUser(userId,res);
@@ -30,12 +39,14 @@ const customerOrderOperations = {
                 }
                 else{
                     resolve(doc);
+
                 }
             });
         })
     },
-    async totalOrder(emailId,firstName,lastName,paymentMethod,fullAddress,zipCode,country,state) {
+    async totalOrder(emailId,firstName,lastName,paymentMethod,fullAddress,zipCode,country,state,randomDelivery) {
         console.log("Inside Total orders ");
+        // ruk ek min papa k phn aaya h
         let userId=await customerOperations.findUserByMail(emailId);
         let newUserOrderObject= new userOrderMap(userId);
         let addUserOrder = await this.addUserOrderMap(newUserOrderObject);
@@ -44,7 +55,7 @@ const customerOrderOperations = {
             let billingAmount=findWholeCarts.reduce((acc,product)=> {
                 return acc+=parseFloat(product.subTotal);
             },acc=0);
-            let newOrder=new OrderModel(addUserOrder.orderId,firstName,lastName,emailId,findWholeCarts,billingAmount,config.orderStatusInitial,paymentMethod,config.paymentStatusForCod,fullAddress,zipCode,country,state);
+            let newOrder=new OrderModel(addUserOrder.orderId,firstName,lastName,emailId,findWholeCarts,billingAmount,config.orderStatusInitial,paymentMethod,config.paymentStatusForCod,fullAddress,zipCode,country,state,randomDelivery.firstName + ' ' + randomDelivery.lastName,randomDelivery.emailId);
             return newOrder;
     },
     findOrders(orders,res) {
@@ -74,12 +85,13 @@ const customerOrderOperations = {
     },
     async makeOrderAndAdd(emailId,firstName,lastName,paymentMethod,fullAddress,zipCode,country,state) {
         console.log("Inside makeOrder and Add");
-        let newPromise=await this.totalOrder(emailId,firstName,lastName,paymentMethod,fullAddress,zipCode,country,state);
+        let randomDeliveryBoyArray=await deliveryBoyOperations.allotDeliveryBoy();
+        let randomDeliveryBoy=randomDeliveryBoyArray[0];
+        let newPromise=await this.totalOrder(emailId,firstName,lastName,paymentMethod,fullAddress,zipCode,country,state,randomDeliveryBoy);
         let newOrder=await this.addNewOrder(newPromise);
-        if(newOrder) {
-        let userId= await customerOperations.findUserByMail(emailId);
-        return userId;
-        }
+        let newDelOrderMap=new OrderDeliveryModel(randomDeliveryBoy.deliveryBoyId,newPromise.orderId);
+        let newDelOrder=await deliveryBoyOperations.addDelOrder(newDelOrderMap);
+        return newOrder;
     }
 }
 module.exports=customerOrderOperations;
