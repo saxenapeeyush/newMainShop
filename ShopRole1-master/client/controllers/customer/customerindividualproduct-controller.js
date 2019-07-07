@@ -1,4 +1,5 @@
 customerapp.controller("customerindividualproduct-controller",function($window,$routeParams,$scope,customersingleproductfactory,ngDialog){
+    $scope.sizeerror=false;
     if(localStorage.name){
       
         $scope.isLoggedIn=true;
@@ -70,6 +71,10 @@ $scope.increaseQuantity=()=>{
       })
       console.log("single controller the end");
       $scope.AddToLocalCart=(actualPrice)=>{
+          if(!$scope.shoesize){
+              $scope.sizeerror=true;
+        return false; }
+        else if($scope.shoesize){
           //if(localStorage.length<1){
         
         //  var a = [];
@@ -144,10 +149,14 @@ $scope.increaseQuantity=()=>{
         //      localStorage.setItem('sessionProducts', JSON.stringify(a));
         //      console.log("loc",localStorage.sessionProducts);
         //   }
+    }
 
       }
       $scope.AddToDBCart=(actualPrice)=>{
-          var email=JSON.parse(localStorage.userEmail);
+        if(!$scope.shoesize){
+            $scope.sizeerror=true;
+      return false; }
+else{          var email=JSON.parse(localStorage.userEmail);
         $scope.singleProducts.actualPrice=actualPrice;
         $scope.singleProducts.quantity=$scope.quantity;
         $scope.singleProducts.shoesize=$scope.shoesize;
@@ -175,6 +184,6 @@ $scope.increaseQuantity=()=>{
 
           
 
-
+    }
       }
 })

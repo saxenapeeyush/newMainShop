@@ -42,6 +42,9 @@ app.controller("admin-controller",function(adminfactory,$scope,$window,$rootScop
           localStorage.rights=JSON.stringify(data.data.doc);
           $window.location.href="dashboardtemplate.html";}
           else if(data.data.rights){  
+            var deliveryboymail=$scope.admin.adminName;
+            localStorage.setItem("deliveryBoyEmail",JSON.stringify(deliveryboymail));
+
             localStorage.tokenId = data.data.token ; 
                    localStorage.rights=JSON.stringify(data.data.rights);
          $window.location.href="dashboardtemplate.html";

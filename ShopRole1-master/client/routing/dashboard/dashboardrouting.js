@@ -7,6 +7,16 @@ dashboardapp.config(function($routeProvider, $locationProvider){
         templateUrl:'./views/deliveryboys.html',
         controller:'alldeliveryboys-controller'
       
+    }).when('/previousorders',{
+        templateUrl:'./views/previousorders.html'
+        
+      
+    }).when('/currentorders',{
+        templateUrl:'./views/currentorders.html'
+      
+    }).when('/pendingorders',{
+        templateUrl:'./views/pendingorders.html'
+      
     })
     .when('/addRole',{
         templateUrl:'./views/addRole.html',

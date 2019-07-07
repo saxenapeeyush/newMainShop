@@ -8,15 +8,19 @@ const bcrypt=require("../../../utils/bcrypt");
 const roleRight=require("../../models/admin/roleRightMapSchema");
 const rightSchema=require("../../models/admin/rightSchema");
 const OrderDeliverySchema=require("../../models/DeliveryBoy/orderdelSchema");
+const orderSchema=require("../../models/customer/orderSchema");
 const deliveryBoyOperations =  {
     async findDeliveryBoyId(deliveryBoyEmail) {
+        console.log("inside find delivery boy Id ")
         return new Promise((resolve,reject)=> {
-            deliveryBoySchema.find({emailId:deliveryBoyEmail},(err,doc)=> {
+            deliveryBoySchema.findOne({emailId:deliveryBoyEmail},(err,doc)=> {
                 if(err) {
                     reject(err);
                 }
                 else{
-                    resolve(doc.deliveryBoyId);
+                    console.log(doc);
+                    // console.log(doc.deliveryBoyId);
+                    resolve(doc);
                 }
             });
         })
@@ -28,43 +32,61 @@ const deliveryBoyOperations =  {
                     reject(err);
                 }
                 else{
+                    console.log("all Orders",docs);
                     resolve(docs);
                 }
             })
         })
     },
     async findOrders(orders,orderStatus){
+        
         return new Promise((resolve,reject)=> {
-            let orderIdArray=[];
+            console.log(orders);
+        let orderIdArray=[];
         for(let order of orders) {
             orderIdArray.push(order.orderId);
         }
-        orderSchema.find({orderId:{ $in: orderIdArray },orderStatus:orderStatus},(err,docs)=> {
+        console.log("Order Id Array mei Kya h ",orderIdArray);
+        console.log("Order Status is ",orderStatus);
+        orderSchema.find({orderId:{$in:orderIdArray},orderStatus:orderStatus},(err,docs)=> {
             if(err) {
                 reject(err);
             }
             else{
+                console.log("All orders are ",docs);
               resolve(docs);
             }
         })
         })
     },
     async fetchPendingOrder(deliveryBoyEmail) {
-        let deliveryBoyId=await this.findDeliveryBoyId(deliveryBoyEmail);
-        let allOrderIds=await this.findAllOrderIds(deliveryBoyId);
+        console.log("Inside fetch pending ");
+        let deliveryBoy=await this.findDeliveryBoyId(deliveryBoyEmail);
+        console.log("delivery boy id mil gayi",deliveryBoy.deliveryBoyId);
+        let allOrderIds=await this.findAllOrderIds(deliveryBoy.deliveryBoyId);
+        console.log("Saare orders ids mil gaye ",allOrderIds);
         let allOrders = await this.findOrders(allOrderIds,config.orderPlaced);
+        console.log(" saare orders mil gaye",allOrders);
         return allOrders;
     },
     async fetchPreviousOrder(deliveryBoyEmail) {
-        let deliveryBoyId=await this.findDeliveryBoyId(deliveryBoyEmail);
-        let allOrderIds=await this.findAllOrderIds(deliveryBoyId);
+        console.log("Inside fetch pending ");
+        let deliveryBoy=await this.findDeliveryBoyId(deliveryBoyEmail);
+        console.log("delivery boy id mil gayi",deliveryBoy.deliveryBoyId);
+        let allOrderIds=await this.findAllOrderIds(deliveryBoy.deliveryBoyId);
+        console.log("Saare orders ids mil gaye ",allOrderIds);
         let allOrders = await this.findOrders(allOrderIds,config.orderDelivered);
+        console.log(" saare orders mil gaye",allOrders);
         return allOrders;
     },
     async fetchCurrentOrder(deliveryBoyEmail){
-        let deliveryBoyId=await this.findDeliveryBoyId(deliveryBoyEmail);
-        let allOrderIds=await this.findAllOrderIds(deliveryBoyId);
+        console.log("Inside fetch pending ");
+        let deliveryBoy=await this.findDeliveryBoyId(deliveryBoyEmail);
+        console.log("delivery boy id mil gayi",deliveryBoy.deliveryBoyId);
+        let allOrderIds=await this.findAllOrderIds(deliveryBoy.deliveryBoyId);
+        console.log("Saare orders ids mil gaye ",allOrderIds);
         let allOrders = await this.findOrders(allOrderIds,config.orderOut);
+        console.log(" saare orders mil gaye",allOrders);
         return allOrders;
     },
     async addDelOrder(newDelOrderMap){

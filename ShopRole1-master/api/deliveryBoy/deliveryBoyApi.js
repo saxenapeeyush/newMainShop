@@ -18,6 +18,8 @@ const upload = multer({
   })
 const DeliveryBoyModel=require('../../models/DeliveryBoy/deliveryBoyModel');
 const deliveryBoyOperations=require('../../db/helpers/deliveryBoy/deliveryBoyOperations');
+const productOperations=require("../../db/helpers/admin/product/productOperations");
+const orderSchema=require("../../db/models/customer/orderSchema");
 var cpUpload =upload.fields([{ name: 'file', maxCount: 1 }, { name: 'file2', maxCount: 1 }])
 deliveryBoyApi.post('/deliveryForm',cpUpload,(req,res)=> {
     console.log("Hello I am delivery Form ");
@@ -65,7 +67,29 @@ deliveryBoyApi.get('/fetchVerified',(req,res)=> {
 deliveryBoyApi.get('/fetchUnVerified',(req,res)=> {
     deliveryBoyOperations.fetchUnVerified(res);
 });
-deliveryBoyApi.get('/pendingOrders',(req,res)=> {
+deliveryBoyApi.post('/changestatus',(req,res)=> {
+  console.log(req.body);
+  let status=req.body.status;
+  let orderId=req.body.orderId;
+ orderSchema.findOneAndUpdate({orderId:orderId},{orderStatus:status},{new:true},(err,doc)=>{
+   if(err){
+    console.log("error is",err);
+
+   }
+   else{
+     if(doc){
+console.log("doc is",doc);
+     }else{
+console.log("doc hi nhi mila");
+     }
+
+   }
+ })
+  
+});
+
+deliveryBoyApi.post('/pendingOrders',(req,res)=> {
+  console.log(req.body);
     let deliveryBoyEmailId=req.body.deliveryBoyEmail;
     let fetchOrders=deliveryBoyOperations.fetchPendingOrder(deliveryBoyEmailId);
   fetchOrders.then((allOrders)=> {
@@ -74,7 +98,9 @@ deliveryBoyApi.get('/pendingOrders',(req,res)=> {
     res.status(500).json({status:config.ERROR,message:"Error while finding the documents of orders ",error:err});
   });
 });
-deliveryBoyApi.get('/previousOrders',(req,res)=> {
+deliveryBoyApi.post('/previousOrders',(req,res)=> {
+  console.log("indside previous order");
+  console.log(req.body);
   let deliveryBoyEmailId=req.body.deliveryBoyEmail;
   let fetchOrders=deliveryBoyOperations.fetchPreviousOrder(deliveryBoyEmailId);
 fetchOrders.then((allOrders)=> {
@@ -83,7 +109,8 @@ fetchOrders.then((allOrders)=> {
   res.status(500).json({status:config.ERROR,message:"Error while finding the documents of orders ",error:err});
 });
 });
-deliveryBoyApi.get('/currentOrders',(req,res)=> {
+deliveryBoyApi.post('/currentOrders',(req,res)=> {
+  // console.log(req.body);
   let deliveryBoyEmailId=req.body.deliveryBoyEmail;
   let fetchOrders=deliveryBoyOperations.fetchCurrentOrder(deliveryBoyEmailId);
 fetchOrders.then((allOrders)=> {

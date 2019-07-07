@@ -1,8 +1,13 @@
-<h1>All Orders</h1>
-<div ng-controller="allorders-controller">
+
+<div ng-controller="pendingorders-controller">
+        
+        <!-- <h1>Pending Orders</h1> -->
+<!-- {{pendingOrders}} -->
+
+
     <!-- <input type="date" ng-model="date"> <br>
     <button class="updateBtn" ng-click="particularOrders()">View orders of selected date</button> <br> <br> -->
-    <button class="updateBtn" ng-click="allOrders()">View All Orders</button> <br> <br>
+    <!-- <button class="updateBtn" ng-click="allOrders()">View All Orders</button> <br> <br> -->
     <!-- {{orderdetails}} -->
     <div class="limiter">
         <div >
@@ -24,15 +29,16 @@
                                     <th  >Billing Amount </th>
                                    
                                     <th>Details </th>
-                                    <th>Alloted To</th></tr>
+                                    <!-- <th>Alloted To</th> -->
+                                </tr>
                         </thead>
                         <tbody>
                           
                                   
-                               <tr dir-paginate="x in orderdetails|itemsPerPage:10">
+                               <tr dir-paginate="x in pendingOrders|itemsPerPage:10">
                                         
                                 
-                                    <td class="coloumn_1">{{x.orderStatus|uppercase}}</td>
+                                    <td class="coloumn_1">{{x.orderStatus|uppercase}} <button class="updateBtn" ng-click="clickToStatus(x.orderId)">Change Status</button> </td>
                                     <td class="coloumn_1">{{x.deliverAddress}},{{x.state}},{{x.country}}</td>
                                     
                                     <td class="coloumn_1">{{x.paymentStatus|uppercase}}</td>
@@ -49,9 +55,9 @@
 
                                            
                                         <td class="coloumn_1"> <button class="updateBtn" ng-click="clickToOpen(x.orderDetails,x.orderId)">Details</button></td>
-                                        <td class="coloumn_1"> 
+                                        <!-- <td class="coloumn_1"> 
                                                 {{x.allotedTo|uppercase}}({{x.deliveryBoyEmailId}})
-                                        </td>
+                                        </td> -->
                                 
                                      
                                         <!-- <td class="productDetails" ng-repeat-start="items in x.orderDetails"> -->
@@ -104,4 +110,5 @@
             </div>
         </div>
     </div>
+
 </div>

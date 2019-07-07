@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./Magnifier.js-master/magnifier.css">
+    <link rel="stylesheet" href="css/jquery.roadmap.min.css">
    
     <!-- <script src="https://kit.fontawesome.com/e5c02bf7e0.js"></script> -->
     <script src="https://kit.fontawesome.com/b06605e970.js"></script>
@@ -393,12 +394,63 @@ border:1px solid #f30601;
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="js/jqzoom.js"></script>
+   <script src="js/jquery.roadmap.min.js"></script>
     <script>
-    $("#bzoom").zoom({
-zoom_area_width: 300,
-// MORE OPTIONS HERE
-});
+//         var myEvents = [{
+//       date: 'Q1 - 2017',
+//       content: 'Lorem ipsum dolor sit amet'
+//     },{
+//       date: 'Q2 - 2017',
+//       content: 'Lorem ipsum dolor sit amet'
+//     },{
+//       date: 'Q3 - 2017',
+//       content: 'Lorem ipsum dolor sit amet'
+//     },
+ 
+//     {
+//       date: 'Q3 - 2018',
+//       content: 'Lorem ipsum dolor sit amet'
+//     }
+// ];
+$.UDNZTimeline({
+    "data_url": "data/demo-2-1.json",
+    "container": {
+        "id": "demo_2_container"
+    },
+    "dots": {
+        "states": {
+            "normal": {
+                "color": "#0088ff",
+                "radius": 12,
+                "border": 6
+            },
+            "active": {
+                "color": "#004499",
+                "radius": 12,
+                "border": 12
+            }
+        }
+    },
+    "lines": {
+        "width": 4,
+        "color": "#6699ff"
+    },
+    "board": {
+        "width": 300,
+        "color_bg": "#0088ff",
+        "margin": 10,
+        "border": 3,
+        "spliter_width": 1
+    },
+    "effect": $.DEFINED_EFFECT_TYPE.rotateX | $.DEFINED_EFFECT_TYPE.slide
+}).Draw();
+$.UDNZTimeline({
+    data_url:"data/demo-1.json",
+    "container": {
+        "id": "demo_1_container",
+        "width": 600
+    }
+}).Draw();
     </script>
 </body>
 </html>

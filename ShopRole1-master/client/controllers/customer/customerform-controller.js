@@ -1,5 +1,6 @@
 customerapp.controller("customerform-controller",function($location,$window,$rootScope,$scope,customerformfactory){
     $scope.user={};
+    $scope.yesorder=false;
     
    // $scope.my = { message: false };
     console.log("You are inside customerform controller");
@@ -37,6 +38,7 @@ customerapp.controller("customerform-controller",function($location,$window,$roo
      
      if(data.data.status=='S' ){
  $scope.message=data.data.message;
+ $scope.yesorder=true;
 //  $scope.orderplaced=false;
 $scope.my.message   = true;       
           console.log("customer form submitted  succesfully");

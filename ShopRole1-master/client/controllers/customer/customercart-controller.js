@@ -1,5 +1,25 @@
 customerapp.controller("customercart-controller",function($rootScope,$window,$scope,customercartfactory){
     console.log("you are inside customer cart controller");
+    $scope.isEmpty=true;
+    if(localStorage.sessionProducts) {
+        $scope.cartLength=(JSON.parse(localStorage.sessionProducts)).length;
+        if($scope.cartLength>=1)
+        {
+            $scope.areproducts=true;
+        }
+        else{
+            $scope.areproducts=false;
+        }
+
+    }else{   $scope.areproducts=false;
+
+    } 
+    // if(!$scope.customerCartProducts){
+    //     $scope.isEmpty=true;
+    // }
+    // else{
+    //     $scope.isEmpty=false;
+    // }
     // $scope.ifproducts=false;
     // if(localStorage.sessionProducts.length>2  ){
     //     $scope.ifproducts=true;
@@ -24,10 +44,12 @@ customerapp.controller("customercart-controller",function($rootScope,$window,$sc
   
     if(localStorage){
         if(localStorage.sessionProducts){
+            // $scope.isEmpty=false;
             $scope.customerCartProducts=JSON.parse(localStorage.sessionProducts);
         }
         else{
             $scope.customerCartProducts=[];
+            // $scope.isEmpty=true;
         }
     }
 

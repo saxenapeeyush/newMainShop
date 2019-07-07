@@ -1,3 +1,183 @@
+
 <div ng-controller="individualorder-controller">
-    individual controller{{singleProducts}}
-</div>
+    
+        <!-- {{singleProducts.orderDetails}} -->
+    <!-- <div ng-show="!ifproducts" class="container">  <br>
+        <h2>SHOPPING CART IS EMPTY</h2>
+        <hr>
+<p>You have no items in your shopping cart.</p>
+<p>Click <a href="#/">here</a>  to continue shopping.</p>
+       </div>
+       <div > -->
+     <div class="container-fluid">
+            <div id="my-timeline"></div>
+
+        <div class="row marginTop">
+           <div class="col-9">
+              <h1 class="topicShop">ORDER DETAILS</h1>
+              <div id="demo_1_container"></div>
+
+           </div>
+           <div class="col-3">
+                <div id="demo_2_1_container"></div>
+              <a class="checkOut"  href="#/customer/orders">BACK TO ALL ORDERS</a>
+              <!-- <a  class="checkOut" ng-show="isLoggedIn" href="#/customer/addressform">PROCEED TO CHECKOUT</a> -->
+                <!-- <button class="checkOut"  ng-show="!isLoggedIn" ng-click="">PROCEED TO CHECKOUT</button>
+                <button class="checkOut"  ng-show="isLoggedIn" ng-click="">PROCEED TO CHECKOUT</button> -->
+           </div>
+        </div>
+     </div>
+ 
+       <div class="container-fluid">
+          <div class="row cartTopic">
+             <div class="col-4">
+                <h6>PRODUCT</h6>
+             </div>
+             <div class="col-3">
+                <h6>UNIT PRICE</h6>
+             </div>
+             <div class="col-3">
+                <h6>QUANTITY</h6>
+             </div>
+             <div class="col-2">
+                <h6>SUBTOTAL</h6>
+             </div>
+          </div>
+          <!-- {{cartproducts}}{{addedcartproducts}} <hr> <h1>data</h1> -->
+          <!-- {{data.data.docs}} <h1>{{numberofproducts}}</h1> -->
+          <!-- {{customercartProducts}} -->
+          <!-- {{customerCartProducts}} -->
+          <!-- <div class="row cartItem" ng-repeat="item in customercartProducts"></div>  -->
+          <div class="row cartItem" dir-paginate="item in singleProducts.orderDetails| itemsPerPage:5">
+             <!-- <h1>Produts coming from db</h1> -->
+             <div class="col-4">
+                <div class="row">
+                   <div class="col-4">
+                      <div class="cartImage"><img ng-src="{{item.prodImgUrl}}" alt="{{item.productName}}"></div>
+                   </div>
+                   <div class="col-8">
+                      <p class="cartProductBrand">{{item.productBrand}}</p>
+                      <p><strong>{{item.productName}}</strong></p>
+                      <div>
+                         <p><strong>Size:</strong> {{item.shoesize}}</p>
+                      </div>
+                      <!-- <div class="editRemove"> 
+                          <a style="text-decoration: none;" href="#/customer/product/{{item.productName}}_{{item.productId}}">Edit </a>
+                          
+
+                   <br>
+                          <button ng-click="removeItemFromDb(item.cartItemId)">Remove Item</button>
+                      </div> -->
+                   </div>
+                </div>
+             </div>
+      
+             <div class="col-3">
+                <p>{{item.actualPrice|currency:"&#8377;"}}</p>
+             </div>
+             <div class="col-3">
+               <p>{{item.quantity}}</p>
+             </div>
+             <div class="col-2">
+                <p>{{item.subTotal|currency:"&#8377;"}}</p>
+             </div>
+          </div>
+          <div class="row cartItem" ng-repeat="item in customerCartProducts">
+             <h1>Products coming from localstorage</h1>
+             <div class="col-4">
+                <div class="row">
+                   <div class="col-4">
+                      <div class="cartImage"><img ng-src="{{item.prodImgUrl}}" alt="{{item.productName}}"></div>
+                   </div>
+                   <div class="col-8">
+                      <p class="cartProductBrand">{{item.productBrand}}</p>
+                      <p><strong>{{item.productName}}</strong></p>
+                      <div>
+                         <p><strong>Size:</strong> {{item.shoesize}}</p>
+                      </div>
+                      <div class="editRemove">
+                          <button>Edit</button><br>
+                          <button ng-click="removeItem(item)">Remove Item</button>
+                      </div>
+                   </div>
+                </div>
+             </div>
+      
+             <div class="col-3">
+                <p>{{item.actualPrice|currency:"&#8377;"}}</p>
+             </div>
+             <div class="col-3">
+               <p>{{item.quantity}}</p>
+             </div>
+             <div class="col-2">
+                <p>{{item.subTotal|currency:"&#8377;"}}</p>
+             </div>
+          </div>
+
+       </div>
+       <div class="pagination">
+           <dir-pagination-controls></dir-pagination-controls>
+       </div>
+       <div class="container-fluid">
+          <div class="row">
+             <div class="col-12 emptyShopping">
+                <!-- <button>EMPTY CART</button> -->
+  <button > <a href="#/" style="text-decoration: none;">CONTINUE SHOPPING</a>
+     </button>
+             </div>
+          </div>
+       </div>
+      <div class="container">
+          <div class="row">
+                <div class="col-6">
+    
+                </div>
+                <div class="col-6">
+                   <div class="row billDetails">
+                      <div class="col-12"><p class="credit" style="text-align-last: center;    margin-left: 50%">CUSTOMER CREDIT</p></div>
+                      <div class="col-12">
+                         <div class="row">
+                            <div class="col-8"><p>SUBTOTAL</p></div>
+                            <div class="col-4"><p class="billAmount">{{singleProducts.orderBillingAmount|currency:"&#8377;"}}</p></div>
+                         </div>
+                      </div>
+                      <div class="col-12">
+                            <div class="row">
+                               <div class="col-8"><p>SHIPPING & HANDLING (STANDARD SHIPPING - FIXED)</p></div>
+                               <div class="col-4"><p class="billAmount">₹ 0.00</p></div>
+                            </div>
+                         </div>
+                         <div class="col-12">
+                               <div class="row">
+                                  <div class="col-8"><p class="grand">GRAND TOTAL (INCL. OF GST)</p></div>
+                                  <div class="col-4"><p class="billAmount mainAmount">{{singleProducts.orderBillingAmount|currency:"&#8377;"}}</p></div>
+                               </div>
+                            </div>
+                            <div class="col-12">
+                                  <div class="col-12">
+                                        <!-- <a class="checkOut" ng-show="!isLoggedIn" href="#">PROCEED TO CHECKOUT</a>
+                                        <a  class="checkOut" ng-show="isLoggedIn" href="#/customer/addressform">PROCEED TO CHECKOUT</a> -->
+                                        <!-- <button class="checkOut"  ng-show="!isLoggedIn" ng-click="">PROCEED TO CHECKOUT</button>
+                              <button class="checkOut"  ng-show="isLoggedIn" ng-click="">PROCEED TO CHECKOUT</button> -->
+                                    </div>
+                            </div>
+                            
+                   </div>
+                   <!-- <div class="row">
+                      <div class="col-8">SUBTOTAL</div>
+                      <div class="col-8">    SHIPPING & HANDLING (STANDARD SHIPPING - FIXED) </div>
+                      <div class="col-8"> <h3>GRAND TOTAL (INCL. OF GST)</h3> </div> 
+    
+                   </div> -->
+                 <!-- <div class="col-4">{{billingAmount}}</div>
+                   <div class="col-4">0.00</div>
+                   <div class="col-4"> <h3>   {{billingAmount}}</h3> -->
+                   </div>
+    
+                     
+                   </div>
+                   
+             </div>
+      </div>
+    </div>
+</div>  

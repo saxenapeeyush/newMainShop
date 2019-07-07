@@ -18,6 +18,8 @@
                             <small>Inclusive of GST</small>
                     </div>
                     <div class="col-12 flex">
+                            <!-- {{sizeerror}} -->
+            
                         <div><p class="sizes"><strong>SIZE (IN UK) : <strong>{{shoesize}}</strong></strong></p></div>
                         <div>
                             <!-- Button trigger modal -->
@@ -54,6 +56,10 @@
       </div>
                         </div>
                     </div>
+                    <div class="col-12">
+                            <div ng-if="sizeerror" class="error-msg"><small >Please select the size! </small> </div> <br>
+      
+                    </div>
                     <div class="col-12"> 
                         
                         <button ng-model="size"  ng-click="size($event)" value="5" name="size" class="rounded-circle size">5</button>
@@ -72,9 +78,9 @@
                     </div>
                     <div class="col-12">
 
-                        <!-- <input type="text" ng-model="quantity" placeholder="enter quantity"> -->
-                        <button class="addToCart"  ng-if="!isLoggedIn" ng-click="AddToLocalCart(actualPrice)"><i class="fas fa-cart-arrow-down cart-item"></i> ADD TO LOCAL CART</button>
-                        <button class="addToCart" ng-if="isLoggedIn" ng-click="AddToDBCart(actualPrice)"><i class="fas fa-cart-arrow-down cart-item"></i> ADD TO  DB CART</button>
+                        <!-- <input type="text" ng-model="quantity" placeholder="ente quantity"> -->
+                        <button class="addToCart"  ng-if="!isLoggedIn" ng-click="AddToLocalCart(actualPrice)"><i class="fas fa-cart-arrow-down cart-item"></i> ADD TO CART</button>
+                        <button class="addToCart" ng-if="isLoggedIn" ng-click="AddToDBCart(actualPrice)"><i class="fas fa-cart-arrow-down cart-item"></i> ADD TO CART</button>
                     </div>
                 </div>
             </div>

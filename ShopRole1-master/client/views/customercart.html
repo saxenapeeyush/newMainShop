@@ -6,13 +6,14 @@
 <p>Click <a href="#/">here</a>  to continue shopping.</p>
          </div>
          <div > -->
-       <div class="container-fluid">
-          <div class="row marginTop">
+       <div  class="container-fluid">
+          <div  class="row marginTop">
              <div class="col-9">
                 <h1 class="topicShop">SHOPPING CART</h1>
              </div>
              <div class="col-3">
-                <a class="checkOut" ng-show="!isLoggedIn" href="#">PROCEED TO CHECKOUT</a>
+                  
+                <a class="checkOut" ng-show="!isLoggedIn" href="#" data-toggle="modal" data-target="#exampleModalCenter">PROCEED TO CHECKOUT</a>
                 <a  class="checkOut" ng-show="isLoggedIn" href="#/customer/addressform">PROCEED TO CHECKOUT</a>
                   <!-- <button class="checkOut"  ng-show="!isLoggedIn" ng-click="">PROCEED TO CHECKOUT</button>
                   <button class="checkOut"  ng-show="isLoggedIn" ng-click="">PROCEED TO CHECKOUT</button> -->
@@ -20,7 +21,7 @@
           </div>
        </div>
    
-         <div class="container-fluid">
+         <div  class="container-fluid">
             <div class="row cartTopic">
                <div class="col-4">
                   <h6>PRODUCT</h6>
@@ -73,8 +74,10 @@
                   <p>{{item.subTotal|currency:"&#8377;"}}</p>
                </div>
             </div>
+            <!-- {{customerCartProducts}} -->
             <div class="row cartItem" ng-repeat="item in customerCartProducts">
-               <h1>Products coming from localstorage</h1>
+               <!-- <h1>Products coming from localstorage</h1> -->
+             
                <div class="col-4">
                   <div class="row">
                      <div class="col-4">
@@ -87,7 +90,8 @@
                            <p><strong>Size:</strong> {{item.shoesize}}</p>
                         </div>
                         <div class="editRemove">
-                            <button>Edit</button><br>
+                              <a style="text-decoration: none;" href="#/customer/product/{{item.productName}}_{{item._id}}">Edit </a>
+                            <!-- <button >Edit</button><br> --> <br>
                             <button ng-click="removeItem(item)">Remove Item</button>
                         </div>
                      </div>
@@ -106,7 +110,7 @@
             </div>
 
          </div>
-         <div class="container-fluid">
+         <div  class="container-fluid">
             <div class="row">
                <div class="col-12 emptyShopping">
                   <!-- <button>EMPTY CART</button> -->
@@ -115,7 +119,7 @@
                </div>
             </div>
          </div>
-        <div class="container">
+        <div  class="container">
             <div class="row">
                   <div class="col-6">
       
@@ -143,7 +147,7 @@
                               </div>
                               <div class="col-12">
                                     <div class="col-12">
-                                          <a class="checkOut" ng-show="!isLoggedIn" href="#">PROCEED TO CHECKOUT</a>
+                                          <a class="checkOut" ng-show="!isLoggedIn" href="#" data-toggle="modal" data-target="#exampleModalCenter">PROCEED TO CHECKOUT</a>
                                           <a  class="checkOut" ng-show="isLoggedIn" href="#/customer/addressform">PROCEED TO CHECKOUT</a>
                                           <!-- <button class="checkOut"  ng-show="!isLoggedIn" ng-click="">PROCEED TO CHECKOUT</button>
                                 <button class="checkOut"  ng-show="isLoggedIn" ng-click="">PROCEED TO CHECKOUT</button> -->

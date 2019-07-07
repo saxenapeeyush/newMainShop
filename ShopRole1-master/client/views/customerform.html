@@ -33,15 +33,31 @@
 </head>
 <body>
         <div class="container" controller="customerform-controller">
+          <!-- {{yesorder}} -->
 
-                <h1>Checkout</h1> <hr>
-                <h1>{{message}}</h1>
+                <h1 ng-if="!yesorder">Checkout</h1> <hr>
+              
+                <div ng-if="yesorder" class="jumbotron">
+                    <h1 class="display-4">{{message}}</h1>
+                    <hr class="my-4">
+                    <p class="lead">Thank you for shopping from Puma . Hope to see you again.</p>
+                   
+                    <p>Regards PUMA.</p>
+                    <!-- <small>
+                      <em>You will be redirected to my orders within 2 seconds . </em>
+                    </small> -->
+                    <p class="lead">
+                      <a class="checkOut" style="text-decoration:none;" href="#/customer/orders" role="button">My Orders</a>
+                    </p>
+                  </div>
+
+
              <h1>  {{orderplaced}}</h1> 
 
              
 
 
-                    <div   id="content">
+                    <div  ng-if="!yesorder" id="content">
                        <div>  <b>  Name & Address</b>
                        
                           <hr>

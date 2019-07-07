@@ -1,0 +1,55 @@
+<div ng-controller="previousOrdersTemplate-controller">
+   
+        
+        <!-- {{Product}} -->
+        <div class="limiter">
+                <div class="container-table100">
+                    <div class="wrap-table100">
+                        <div class="table100"> 
+                            <!-- <h3 style="text-align: center;font-weight: bold">
+                            ORDER ID: {{orderID}}</h3> -->
+                            <table ><thead >
+                                    <tr class="table100-head"  >
+                                            <th  >Category</th>
+                                            <th  > Product Name</th>
+                                            <th  > Product Image</th>
+                                            <th  > Quantity</th>
+                                           
+                                            <th  > Shoesize</th>
+                                            <th  > Price</th>
+                                            <th  >Sub Total</th>
+                                            </tr>
+                                </thead>
+                                <tbody>
+                                  
+                                          
+                                       <tr ng-repeat="item in Product|itemsPerPage:10">
+                                                
+                                            <td class="coloumn_1">{{item.category|uppercase}}</td>
+                                            <td class="coloumn_1">{{item.productName}}</td>
+                                            <td class="coloumn_1"> <img style="height:100px;width:100px;" ng-src='{{item.prodImgUrl}}' alt=""> </td>
+                                            <td class="coloumn_1">{{item.quantity}}</td>
+                                            <!-- <td class="coloumn_1">{{item.paymentStatus}}</td> -->
+                                                
+                                                <td class="coloumn_1">{{item.shoesize}}</td>
+                                                    
+                                                    <td class="coloumn_1"> {{item.actualPrice| currency:'&#8377;'}}</td>
+                                                        
+                                                <td class="coloumn_1">{{item.subTotal|currency:'&#8377;'}}</td>
+    
+                                                    
+                                                    
+                                                   
+                                                <!-- <td class="coloumn_1"> <button class="updateBtn" ng-click="clickToOpen(x.orderDetails)">Order Details</button></td> -->
+                                        
+                                
+                                    </tr>
+                                        
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+</div>

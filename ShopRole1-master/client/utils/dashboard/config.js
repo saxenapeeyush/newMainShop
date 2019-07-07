@@ -25,4 +25,11 @@ dashboardapp.constant("GETVERIFIEDBOYS_URL","http://localhost:1234/deliveryboy/f
 dashboardapp.constant("GETUNVERIFIEDBOYS_URL","http://localhost:1234/deliveryboy/fetchUnVerified");
 dashboardapp.constant("VERIFYDELIVERYBOYS_URL","http://localhost:1234/deliveryboy/verifyDeliveryBoy");
 dashboardapp.constant("UNVERIFYDELIVERYBOYS_URL","http://localhost:1234/deliveryboy/unVerifyDeliveryBoy");
+dashboardapp.constant("GETPENDINGORDER_URL","http://localhost:1234/deliveryboy/pendingOrders");
+dashboardapp.constant("GETCURRENTORDER_URL","http://localhost:1234/deliveryboy/currentOrders");
+
+
+dashboardapp.constant("CHANGESTATUS_URL","http://localhost:1234/deliveryboy/changestatus");
+dashboardapp.constant("GETPREVIOUSORDER_URL","http://localhost:1234/deliveryboy/previousOrders");
+
 

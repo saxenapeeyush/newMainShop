@@ -9,6 +9,9 @@ const config = {
     orderPlaced:"placed",
     orderDelivered:"delivered",
     orderOut:"out for delivery",
+    orderDispatched:"dispatched",
+    orderShipped:"shipped",
+    orderReceived:"received",
     ADMINPASS:'admin',
     excelMimeType :['application/vnd.ms-excel'],
     ROLE:{
